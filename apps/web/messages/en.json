@@ -64,7 +64,11 @@
     "collapseSidebar": "Collapse sidebar",
     "expandSidebar": "Expand sidebar",
     "bookings": "Bookings",
-    "campaigns": "Campaigns"
+    "campaigns": "Campaigns",
+    "communications": "Communications",
+    "allCommunications": "All Communications",
+    "emailTemplates": "Email Templates",
+    "documents": "Documents"
   },
   "topbar": {
     "search": "Search properties, leads, tenants...",

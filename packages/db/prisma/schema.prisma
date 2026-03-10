@@ -483,6 +483,187 @@ model Campaign {
   @@map("campaigns")
 }
 
+// ============================================================
+// Sprint 5 — Communications Enums
+// ============================================================
+
+enum CommunicationType {
+  EMAIL
+  SMS
+  WHATSAPP
+  CALL
+  NOTE
+}
+
+enum CommunicationDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum CommunicationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  FAILED
+  READ
+}
+
+enum EmailTemplateCategory {
+  BOOKING_CONFIRMATION
+  PAYMENT_REMINDER
+  WELCOME
+  FOLLOW_UP
+  CUSTOM
+}
+
+enum DocumentCategory {
+  CONTRACT
+  INVOICE
+  RECEIPT
+  ID_DOCUMENT
+  DEED
+  FLOOR_PLAN
+  OTHER
+}
+
+enum DocumentEntityType {
+  PROPERTY
+  UNIT
+  BOOKING
+  LEAD
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+  REMINDER
+}
+
+enum MilestoneStatus {
+  UPCOMING
+  DUE
+  OVERDUE
+  PAID
+  CANCELLED
+}
+
+// ============================================================
+// Sprint 5 — Communications Models
+// ============================================================
+
+model Communication {
+  id        String                 @id @default(cuid())
+  tenantId  String
+  leadId    String?
+  bookingId String?
+  type      CommunicationType
+  direction CommunicationDirection
+  subject   String?
+  body      String?
+  from      String?
+  to        String?
+  status    CommunicationStatus    @default(PENDING)
+  sentAt    DateTime?
+  readAt    DateTime?
+  metadata  Json                   @default("{}")
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, type])
+  @@index([tenantId, leadId])
+  @@index([tenantId, bookingId])
+  @@map("communications")
+}
+
+model EmailTemplate {
+  id        String                @id @default(cuid())
+  tenantId  String
+  name      String
+  subject   String
+  bodyHtml  String
+  bodyText  String?
+  category  EmailTemplateCategory @default(CUSTOM)
+  variables Json                  @default("[]")
+  isDefault Boolean               @default(false)
+  isActive  Boolean               @default(true)
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([tenantId, category])
+  @@map("email_templates")
+}
+
+model Document {
+  id          String             @id @default(cuid())
+  tenantId    String
+  name        String
+  fileName    String
+  mimeType    String
+  sizeBytes   Int                @default(0)
+  category    DocumentCategory   @default(OTHER)
+  entityType  DocumentEntityType
+  entityId    String
+  uploadedBy  String
+  description String?
+  tags        String[]           @default([])
+  url         String
+  isArchived  Boolean            @default(false)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, entityType, entityId])
+  @@index([tenantId, category])
+  @@map("documents")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  tenantId  String
+  userId    String
+  type      NotificationType @default(INFO)
+  title     String
+  message   String
+  link      String?
+  isRead    Boolean          @default(false)
+  readAt    DateTime?
+  metadata  Json             @default("{}")
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, userId])
+  @@index([tenantId, userId, isRead])
+  @@map("notifications")
+}
+
+model Milestone {
+  id            String          @id @default(cuid())
+  tenantId      String
+  bookingId     String
+  name          String
+  description   String?
+  amount        Float
+  dueDate       DateTime
+  paidDate      DateTime?
+  status        MilestoneStatus @default(UPCOMING)
+  paymentMethod String?
+  receiptNumber String?
+  notes         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, bookingId])
+  @@index([tenantId, status])
+  @@map("milestones")
+}
+
 model LocaleSettings {
   id             String   @id @default(cuid())
   tenantId       String   @unique

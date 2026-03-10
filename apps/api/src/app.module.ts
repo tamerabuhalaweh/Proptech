@@ -20,6 +20,11 @@ import { BookingsModule } from './bookings/bookings.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { LocaleModule } from './locale/locale.module';
+import { CommunicationsModule } from './communications/communications.module';
+import { EmailTemplatesModule } from './email-templates/email-templates.module';
+import { DocumentsModule } from './documents/documents.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { MilestonesModule } from './milestones/milestones.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -56,6 +61,13 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     SubscriptionsModule,
     CampaignsModule,
     LocaleModule,
+
+    // Sprint 5 modules
+    CommunicationsModule,
+    EmailTemplatesModule,
+    DocumentsModule,
+    NotificationsModule,
+    MilestonesModule,
   ],
   providers: [
     // Global JWT guard — all routes require auth by default

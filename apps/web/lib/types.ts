@@ -538,6 +538,124 @@ export interface BillingHistoryItem {
   invoiceUrl?: string;
 }
 
+// ===== Communication Types =====
+
+export type CommunicationType = "email" | "sms" | "whatsapp" | "call" | "note";
+export type CommunicationDirection = "inbound" | "outbound";
+export type CommunicationStatus = "sent" | "delivered" | "read" | "failed" | "draft" | "pending";
+
+export interface Communication {
+  id: string;
+  type: CommunicationType;
+  direction: CommunicationDirection;
+  contact: {
+    name: string;
+    nameAr: string;
+    email?: string;
+    phone?: string;
+  };
+  subject: string;
+  subjectAr?: string;
+  body: string;
+  bodyAr?: string;
+  status: CommunicationStatus;
+  leadId?: string;
+  bookingId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ===== Email Template Types =====
+
+export type TemplateCategory = "welcome" | "follow_up" | "payment" | "booking" | "general" | "marketing";
+
+export interface EmailTemplate {
+  id: string;
+  name: string;
+  nameAr: string;
+  category: TemplateCategory;
+  subject: string;
+  subjectAr?: string;
+  body: string;
+  bodyAr?: string;
+  variables: string[];
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ===== Document Types =====
+
+export type DocumentCategory = "contract" | "invoice" | "receipt" | "id" | "deed" | "floor_plan" | "other";
+export type DocumentEntityType = "property" | "unit" | "booking" | "lead";
+
+export interface Document {
+  id: string;
+  name: string;
+  nameAr?: string;
+  category: DocumentCategory;
+  entityType?: DocumentEntityType;
+  entityId?: string;
+  entityName?: string;
+  entityNameAr?: string;
+  description?: string;
+  descriptionAr?: string;
+  url: string;
+  fileSize: number;
+  mimeType?: string;
+  tags: string[];
+  uploadedBy: {
+    id: string;
+    name: string;
+    nameAr?: string;
+  };
+  isArchived: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ===== Notification Types =====
+
+export type NotificationType = "info" | "warning" | "success" | "error" | "reminder";
+
+export interface AppNotification {
+  id: string;
+  type: NotificationType;
+  title: string;
+  titleAr: string;
+  message: string;
+  messageAr: string;
+  link?: string;
+  read: boolean;
+  createdAt: string;
+}
+
+// ===== Milestone / Payment Types =====
+
+export type MilestoneStatus = "upcoming" | "due" | "overdue" | "paid" | "cancelled";
+export type PaymentMethod = "bank_transfer" | "cash" | "cheque" | "credit_card" | "other";
+
+export interface Milestone {
+  id: string;
+  bookingId: string;
+  name: string;
+  nameAr?: string;
+  description?: string;
+  descriptionAr?: string;
+  amount: number;
+  dueDate: string;
+  status: MilestoneStatus;
+  paidAt?: string;
+  payment?: {
+    method: PaymentMethod;
+    receiptNumber?: string;
+    notes?: string;
+    paidAt: string;
+  };
+  order: number;
+  createdAt: string;
+}
+
 // ===== Locale Types =====
 
 export interface LocaleSettings {

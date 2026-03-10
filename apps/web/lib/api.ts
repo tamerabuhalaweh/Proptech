@@ -480,4 +480,127 @@ export const localeApi = {
   },
 };
 
+// Communications API
+export const communicationsApi = {
+  list: async (params?: {
+    type?: string[];
+    direction?: string;
+    status?: string[];
+    search?: string;
+    page?: number;
+    perPage?: number;
+  }) => {
+    const { data } = await api.get("/api/communications", { params });
+    return data;
+  },
+  get: async (id: string) => {
+    const { data } = await api.get(`/api/communications/${id}`);
+    return data;
+  },
+  create: async (payload: Record<string, unknown>) => {
+    const { data } = await api.post("/api/communications", payload);
+    return data;
+  },
+};
+
+// Email Templates API
+export const emailTemplatesApi = {
+  list: async (params?: {
+    category?: string[];
+    search?: string;
+    page?: number;
+    perPage?: number;
+  }) => {
+    const { data } = await api.get("/api/email-templates", { params });
+    return data;
+  },
+  get: async (id: string) => {
+    const { data } = await api.get(`/api/email-templates/${id}`);
+    return data;
+  },
+  create: async (payload: Record<string, unknown>) => {
+    const { data } = await api.post("/api/email-templates", payload);
+    return data;
+  },
+  update: async (id: string, payload: Record<string, unknown>) => {
+    const { data } = await api.patch(`/api/email-templates/${id}`, payload);
+    return data;
+  },
+  send: async (id: string, payload: { recipientEmail: string; leadId?: string; variables?: Record<string, string> }) => {
+    const { data } = await api.post(`/api/email-templates/${id}/send`, payload);
+    return data;
+  },
+};
+
+// Documents API
+export const documentsApi = {
+  list: async (params?: {
+    category?: string[];
+    entityType?: string[];
+    search?: string;
+    isArchived?: boolean;
+    page?: number;
+    perPage?: number;
+  }) => {
+    const { data } = await api.get("/api/documents", { params });
+    return data;
+  },
+  get: async (id: string) => {
+    const { data } = await api.get(`/api/documents/${id}`);
+    return data;
+  },
+  create: async (payload: Record<string, unknown>) => {
+    const { data } = await api.post("/api/documents", payload);
+    return data;
+  },
+  archive: async (id: string) => {
+    const { data } = await api.patch(`/api/documents/${id}/archive`);
+    return data;
+  },
+  unarchive: async (id: string) => {
+    const { data } = await api.patch(`/api/documents/${id}/unarchive`);
+    return data;
+  },
+};
+
+// Notifications API
+export const notificationsApi = {
+  list: async (params?: { page?: number; perPage?: number }) => {
+    const { data } = await api.get("/api/notifications", { params });
+    return data;
+  },
+  unreadCount: async () => {
+    const { data } = await api.get("/api/notifications/unread-count");
+    return data;
+  },
+  markAsRead: async (id: string) => {
+    const { data } = await api.patch(`/api/notifications/${id}/read`);
+    return data;
+  },
+  markAllAsRead: async () => {
+    const { data } = await api.patch("/api/notifications/read-all");
+    return data;
+  },
+};
+
+// Milestones API
+export const milestonesApi = {
+  list: async (bookingId: string) => {
+    const { data } = await api.get(`/api/bookings/${bookingId}/milestones`);
+    return data;
+  },
+  create: async (bookingId: string, payload: Record<string, unknown>) => {
+    const { data } = await api.post(`/api/bookings/${bookingId}/milestones`, payload);
+    return data;
+  },
+  recordPayment: async (bookingId: string, milestoneId: string, payload: Record<string, unknown>) => {
+    const { data } = await api.post(`/api/bookings/${bookingId}/milestones/${milestoneId}/payment`, payload);
+    return data;
+  },
+  generateInstallments: async (bookingId: string, payload: { totalAmount: number; numberOfInstallments: number; startDate: string }) => {
+    const { data } = await api.post(`/api/bookings/${bookingId}/milestones/generate`, payload);
+    return data;
+  },
+};
+
 export { setTokens, clearTokens, getAccessToken };

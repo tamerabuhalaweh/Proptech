@@ -22,6 +22,9 @@ import {
   PanelLeftOpen,
   CalendarCheck,
   Tag,
+  MessageSquare,
+  Mail,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getInitials } from "@/lib/utils";
@@ -90,6 +93,20 @@ const mainNavItems: NavItem[] = [
     icon: Users,
     href: "/leads",
     badge: 24,
+  },
+  {
+    labelKey: "communications",
+    icon: MessageSquare,
+    href: "/communications",
+    children: [
+      { labelKey: "allCommunications", icon: MessageSquare, href: "/communications" },
+      { labelKey: "emailTemplates", icon: Mail, href: "/communications/templates" },
+    ],
+  },
+  {
+    labelKey: "documents",
+    icon: FileText,
+    href: "/documents",
   },
   {
     labelKey: "tenants",
