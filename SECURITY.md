@@ -36,7 +36,7 @@ The Proptech platform is a multi-tenant SaaS application with **21 NestJS API mo
 
 #### 4. Weak/Default Secrets in Docker Compose
 - **File**: `docker-compose.yml`
-- **Issue**: JWT secrets, Postgres password, and Redis password had hardcoded fallback defaults (weak placeholder defaults). If deployed without `.env`, these weak defaults would be used
+- **Issue**: JWT secrets, Postgres password, and Redis password had hardcoded fallback defaults. If deployed without `.env`, these weak defaults would be used
 - **Fix**: Changed to `${VAR:?error message}` syntax — Docker Compose now **fails to start** if secrets are not explicitly set. Removed direct port exposure for Postgres and Redis
 - **Impact**: Full database and auth bypass in production
 
