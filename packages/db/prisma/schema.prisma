@@ -1,0 +1,502 @@
+// ============================================================
+// Proptech Platform — Prisma Schema
+// Multi-tenant property management SaaS
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// Enums
+// ============================================================
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  TENANT_ADMIN
+  MANAGER
+  BROKER
+  VIEWER
+}
+
+enum ProjectStatus {
+  DRAFT
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+// ============================================================
+// Models
+// ============================================================
+
+model Tenant {
+  id           String       @id @default(cuid())
+  name         String
+  slug         String       @unique
+  tradeLicense String?
+  vatNumber    String?
+  contactEmail String
+  country      String       @default("SA")
+  status       TenantStatus @default(ACTIVE)
+  config       Json         @default("{}")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  deletedAt    DateTime?
+
+  users          User[]
+  projects       Project[]
+  properties     Property[]
+  subscription   Subscription?
+  localeSettings LocaleSettings?
+
+  @@map("tenants")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  email        String
+  passwordHash String
+  displayName  String
+  role         UserRole  @default(VIEWER)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  leads        Lead[]   @relation("AssignedLeads")
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@map("users")
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  tenantId    String
+  tenant      Tenant        @relation(fields: [tenantId], references: [id])
+  name        String
+  nameAr      String?
+  description String?
+  status      ProjectStatus @default(DRAFT)
+  location    String?
+  totalUnits  Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  @@index([tenantId])
+  @@map("projects")
+}
+
+// ============================================================
+// Sprint 2 — Property Management Enums
+// ============================================================
+
+enum PropertyType {
+  RESIDENTIAL
+  COMMERCIAL
+  MIXED_USE
+  LAND
+}
+
+enum UnitType {
+  STUDIO
+  ONE_BR
+  TWO_BR
+  THREE_BR
+  FOUR_BR
+  PENTHOUSE
+  RETAIL
+  OFFICE
+  WAREHOUSE
+}
+
+enum UnitStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  BLOCKED
+  UNDER_MAINTENANCE
+}
+
+enum DiscountStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ============================================================
+// Sprint 3 — Leads CRM Enums
+// ============================================================
+
+enum LeadSource {
+  WEBSITE
+  WHATSAPP
+  REFERRAL
+  WALK_IN
+  SOCIAL
+  PHONE
+  EMAIL
+}
+
+enum LeadStage {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum ActivityType {
+  CALL
+  EMAIL
+  MEETING
+  SITE_VISIT
+  WHATSAPP
+  NOTE
+  STAGE_CHANGE
+  ASSIGNMENT
+}
+
+// ============================================================
+// Sprint 2 — Property Management Models
+// ============================================================
+
+model Property {
+  id            String        @id @default(cuid())
+  tenantId      String
+  tenant        Tenant        @relation(fields: [tenantId], references: [id])
+  name          String
+  nameAr        String?
+  description   String?
+  descriptionAr String?
+  type          PropertyType  @default(RESIDENTIAL)
+  status        ProjectStatus @default(DRAFT)
+  location      String?
+  city          String?
+  totalUnits    Int           @default(0)
+  coverImage    String?
+  images        String[]      @default([])
+  amenities     String[]      @default([])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+  buildings     Building[]
+  leads         Lead[]
+
+  @@index([tenantId])
+  @@index([tenantId, status])
+  @@map("properties")
+}
+
+model Building {
+  id          String        @id @default(cuid())
+  tenantId    String
+  propertyId  String
+  property    Property      @relation(fields: [propertyId], references: [id])
+  name        String
+  nameAr      String?
+  totalFloors Int           @default(1)
+  totalUnits  Int           @default(0)
+  status      ProjectStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  units       Unit[]
+
+  @@index([tenantId])
+  @@index([propertyId])
+  @@map("buildings")
+}
+
+model Unit {
+  id           String         @id @default(cuid())
+  tenantId     String
+  buildingId   String
+  building     Building       @relation(fields: [buildingId], references: [id])
+  unitNumber   String
+  floor        Int
+  type         UnitType       @default(STUDIO)
+  area         Float
+  status       UnitStatus     @default(AVAILABLE)
+  basePrice    Float          @default(0)
+  view         String?
+  features     String[]       @default([])
+  notes        String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  discounts    Discount[]
+  priceHistory PriceHistory[]
+  bookings     Booking[]
+
+  @@unique([buildingId, unitNumber])
+  @@index([tenantId])
+  @@index([tenantId, status])
+  @@index([buildingId])
+  @@map("units")
+}
+
+model Discount {
+  id          String         @id @default(cuid())
+  tenantId    String
+  unitId      String
+  unit        Unit           @relation(fields: [unitId], references: [id])
+  type        String
+  value       Float
+  reason      String?
+  status      DiscountStatus @default(PENDING)
+  requestedBy String
+  approvedBy  String?
+  approvedAt  DateTime?
+  validFrom   DateTime?
+  validTo     DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([tenantId])
+  @@index([unitId])
+  @@map("discounts")
+}
+
+model PriceHistory {
+  id        String   @id @default(cuid())
+  tenantId  String
+  unitId    String
+  unit      Unit     @relation(fields: [unitId], references: [id])
+  oldPrice  Float
+  newPrice  Float
+  changedBy String
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([unitId])
+  @@map("price_history")
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  tenantId    String
+  entityType  String
+  entityId    String
+  action      String
+  description String
+  performedBy String
+  metadata    Json     @default("{}")
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([tenantId, createdAt(sort: Desc)])
+  @@map("activity_logs")
+}
+
+// ============================================================
+// Sprint 3 — Leads CRM Models
+// ============================================================
+
+model Lead {
+  id              String       @id @default(cuid())
+  tenantId        String
+  name            String
+  email           String?
+  phone           String?
+  source          LeadSource   @default(WEBSITE)
+  stage           LeadStage    @default(NEW)
+  score           Int          @default(0)
+  assignedTo      String?
+  assignedUser    User?        @relation("AssignedLeads", fields: [assignedTo], references: [id])
+  propertyId      String?
+  property        Property?    @relation(fields: [propertyId], references: [id])
+  unitPreferences Json         @default("{}")
+  budget          Float?
+  budgetMax       Float?
+  notes           String?
+  tags            String[]     @default([])
+  lastContactedAt DateTime?
+  nextFollowUpAt  DateTime?
+  wonAt           DateTime?
+  lostAt          DateTime?
+  lostReason      String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  deletedAt       DateTime?
+  activities      LeadActivity[]
+  bookings        Booking[]
+
+  @@index([tenantId])
+  @@index([tenantId, stage])
+  @@index([tenantId, assignedTo])
+  @@index([tenantId, score(sort: Desc)])
+  @@map("leads")
+}
+
+model LeadActivity {
+  id          String       @id @default(cuid())
+  tenantId    String
+  leadId      String
+  lead        Lead         @relation(fields: [leadId], references: [id])
+  type        ActivityType
+  title       String
+  description String?
+  scheduledAt DateTime?
+  completedAt DateTime?
+  outcome     String?
+  performedBy String
+  metadata    Json         @default("{}")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([tenantId])
+  @@index([leadId])
+  @@index([tenantId, scheduledAt])
+  @@map("lead_activities")
+}
+
+// ============================================================
+// Sprint 4 — Booking & Billing Enums
+// ============================================================
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+  COMPLETED
+}
+
+enum SubscriptionPlan {
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum BillingCycle {
+  MONTHLY
+  ANNUAL
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  ENDED
+  CANCELLED
+}
+
+// ============================================================
+// Sprint 4 — Booking & Billing Models
+// ============================================================
+
+model Booking {
+  id              String        @id @default(cuid())
+  tenantId        String
+  unitId          String
+  unit            Unit          @relation(fields: [unitId], references: [id])
+  leadId          String?
+  lead            Lead?         @relation(fields: [leadId], references: [id])
+  status          BookingStatus @default(PENDING)
+  totalPrice      Float
+  downPayment     Float         @default(0)
+  paymentPlan     Json          @default("{}")
+  reservationDate DateTime      @default(now())
+  expiryDate      DateTime?
+  confirmedAt     DateTime?
+  cancelledAt     DateTime?
+  cancelReason    String?
+  completedAt     DateTime?
+  documents       String[]      @default([])
+  notes           String?
+  createdBy       String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([unitId, status], name: "one_active_booking")
+  @@index([tenantId])
+  @@index([tenantId, status])
+  @@index([unitId])
+  @@map("bookings")
+}
+
+model Subscription {
+  id                 String             @id @default(cuid())
+  tenantId           String             @unique
+  tenant             Tenant             @relation(fields: [tenantId], references: [id])
+  plan               SubscriptionPlan   @default(STARTER)
+  status             SubscriptionStatus @default(TRIAL)
+  billingCycle       BillingCycle       @default(MONTHLY)
+  currentPeriodStart DateTime           @default(now())
+  currentPeriodEnd   DateTime
+  trialEndsAt        DateTime?
+  cancelledAt        DateTime?
+  maxProperties      Int                @default(5)
+  maxUnits           Int                @default(50)
+  maxUsers           Int                @default(3)
+  storageGB          Int                @default(1)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@index([tenantId])
+  @@map("subscriptions")
+}
+
+model Campaign {
+  id            String         @id @default(cuid())
+  tenantId      String
+  name          String
+  description   String?
+  status        CampaignStatus @default(DRAFT)
+  discountType  String         @default("percentage")
+  discountValue Float
+  startDate     DateTime
+  endDate       DateTime
+  propertyIds   String[]       @default([])
+  unitIds       String[]       @default([])
+  createdBy     String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, status])
+  @@map("campaigns")
+}
+
+model LocaleSettings {
+  id             String   @id @default(cuid())
+  tenantId       String   @unique
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  language       String   @default("en")
+  calendarType   String   @default("gregorian")
+  dateFormat     String   @default("DD/MM/YYYY")
+  timeFormat     String   @default("24h")
+  currency       String   @default("SAR")
+  timezone       String   @default("Asia/Riyadh")
+  firstDayOfWeek Int      @default(0)
+  numberFormat   String   @default("en-SA")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("locale_settings")
+}

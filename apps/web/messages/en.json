@@ -1,0 +1,966 @@
+{
+  "common": {
+    "appName": "PropTech",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "viewAll": "View all",
+    "noResults": "No results found",
+    "clearAll": "Clear all",
+    "selectAll": "Select all",
+    "markAllRead": "Mark all as read",
+    "showing": "Showing {from}-{to} of {total}",
+    "perPage": "per page",
+    "selected": "{count} selected",
+    "actions": "Actions",
+    "create": "Create",
+    "update": "Update",
+    "description": "Description",
+    "name": "Name",
+    "type": "Type",
+    "status": "Status",
+    "city": "City",
+    "location": "Location",
+    "area": "Area",
+    "price": "Price",
+    "floor": "Floor",
+    "total": "Total",
+    "details": "Details",
+    "overview": "Overview",
+    "all": "All"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "properties": "Properties",
+    "allProperties": "All Properties",
+    "inventoryGrid": "Inventory Grid",
+    "addProperty": "Add Property",
+    "leads": "Leads & CRM",
+    "tenants": "Tenants",
+    "finance": "Finance",
+    "invoices": "Invoices",
+    "payments": "Payments",
+    "reports": "Reports",
+    "settings": "Settings",
+    "help": "Help & Support",
+    "logout": "Log out",
+    "profile": "Profile",
+    "switchTenant": "Switch Organization",
+    "collapseSidebar": "Collapse sidebar",
+    "expandSidebar": "Expand sidebar",
+    "bookings": "Bookings",
+    "campaigns": "Campaigns"
+  },
+  "topbar": {
+    "search": "Search properties, leads, tenants...",
+    "searchShortcut": "⌘K",
+    "notifications": "Notifications",
+    "notificationsCount": "{count} unread notifications",
+    "noNotifications": "All caught up!",
+    "switchLanguage": "العربية",
+    "toggleTheme": "Toggle theme",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": {
+      "morning": "Good morning, {name}",
+      "afternoon": "Good afternoon, {name}",
+      "evening": "Good evening, {name}"
+    },
+    "dateRange": "Last 30 days",
+    "kpi": {
+      "totalProperties": "Total Properties",
+      "occupancyRate": "Occupancy Rate",
+      "revenueMTD": "Revenue (MTD)",
+      "activeLeads": "Active Leads",
+      "vsLastMonth": "vs last month",
+      "newThisWeek": "new this week",
+      "thisMonth": "this month"
+    },
+    "charts": {
+      "revenueTrend": "Revenue Trend",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "unitStatus": "Unit Status",
+      "totalUnits": "Total Units"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "viewAll": "View all activity",
+      "leadAssigned": "Lead assigned",
+      "paymentReceived": "Payment received",
+      "leaseExpiring": "Lease expiring",
+      "maintenanceOverdue": "Maintenance overdue",
+      "propertyAdded": "Property added",
+      "unitStatusChanged": "Unit status changed",
+      "timeAgo": {
+        "justNow": "Just now",
+        "minutesAgo": "{count}m ago",
+        "hoursAgo": "{count}h ago",
+        "daysAgo": "{count}d ago"
+      }
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "addProperty": "Add Property",
+      "newLead": "New Lead",
+      "generateReport": "Generate Report",
+      "viewInventory": "View Inventory"
+    },
+    "upcoming": {
+      "title": "Upcoming",
+      "leaseRenewals": "{count} lease renewals due this week",
+      "propertyVisits": "{count} property visits scheduled today"
+    },
+    "topProperties": {
+      "title": "Top Properties by Revenue",
+      "property": "Property",
+      "units": "Units",
+      "occupancy": "Occupancy",
+      "revenue": "Revenue",
+      "trend": "Trend"
+    },
+    "empty": {
+      "noProperties": "Add your first property to see metrics",
+      "addProperty": "Add Property",
+      "noRevenue": "No revenue data yet",
+      "noActivity": "No recent activity"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your PropTech account",
+      "email": "Email address",
+      "emailPlaceholder": "name@company.com",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "signIn": "Sign in",
+      "signingIn": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "orContinue": "Or continue with",
+      "google": "Google",
+      "microsoft": "Microsoft"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Start managing your properties with PropTech",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Ahmed Al-Qahtani",
+      "email": "Email address",
+      "emailPlaceholder": "name@company.com",
+      "company": "Company name",
+      "companyPlaceholder": "Your company name",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "agreeTerms": "I agree to the {terms} and {privacy}",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy",
+      "signUp": "Create account",
+      "signingUp": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "passwordRequirements": "At least 8 characters with uppercase, lowercase, and number"
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "email": "Email address",
+      "emailPlaceholder": "name@company.com",
+      "sendLink": "Send reset link",
+      "sending": "Sending...",
+      "backToLogin": "Back to sign in",
+      "checkEmail": "Check your email",
+      "checkEmailDescription": "We sent a password reset link to {email}",
+      "resend": "Didn't receive the email? Resend"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 8 characters",
+      "passwordMatch": "Passwords do not match",
+      "nameRequired": "Full name is required",
+      "companyRequired": "Company name is required",
+      "agreeRequired": "You must agree to the terms"
+    }
+  },
+  "unitStatus": {
+    "available": "Available",
+    "reserved": "Reserved",
+    "sold": "Sold",
+    "occupied": "Occupied",
+    "blocked": "Blocked",
+    "maintenance": "Maintenance"
+  },
+  "propertyStatus": {
+    "active": "Active",
+    "under_construction": "Under Construction",
+    "completed": "Completed",
+    "archived": "Archived"
+  },
+  "propertyType": {
+    "residential": "Residential",
+    "commercial": "Commercial",
+    "mixed": "Mixed Use",
+    "land": "Land"
+  },
+  "unitType": {
+    "studio": "Studio",
+    "1br": "1 BR",
+    "2br": "2 BR",
+    "3br": "3 BR",
+    "4br": "4 BR",
+    "penthouse": "Penthouse",
+    "commercial": "Commercial",
+    "retail": "Retail"
+  },
+  "properties": {
+    "title": "Properties",
+    "subtitle": "{count} properties",
+    "addProperty": "Add Property",
+    "searchPlaceholder": "Search properties...",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "sortBy": "Sort by",
+    "sort": {
+      "nameAsc": "Name (A-Z)",
+      "nameDesc": "Name (Z-A)",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "occupancyHigh": "Occupancy (highest)",
+      "occupancyLow": "Occupancy (lowest)",
+      "unitsHigh": "Units (most)",
+      "unitsLow": "Units (fewest)",
+      "revenueHigh": "Revenue (highest)",
+      "revenueLow": "Revenue (lowest)"
+    },
+    "filters": {
+      "type": "Property Type",
+      "status": "Status",
+      "city": "City",
+      "clearFilters": "Clear filters"
+    },
+    "card": {
+      "units": "{count} units",
+      "occupancy": "{value}% occupancy",
+      "viewProperty": "View Property",
+      "moreActions": "More actions",
+      "editProperty": "Edit",
+      "archiveProperty": "Archive",
+      "deleteProperty": "Delete"
+    },
+    "empty": {
+      "title": "No properties yet",
+      "description": "Get started by adding your first property to manage units, tenants, and finances.",
+      "addFirst": "Add Property"
+    },
+    "emptySearch": {
+      "title": "No properties found",
+      "description": "No properties match your search or filters. Try adjusting your criteria.",
+      "clearFilters": "Clear filters"
+    },
+    "create": {
+      "title": "Add New Property",
+      "description": "Fill in the details to create a new property.",
+      "name": "Property Name",
+      "namePlaceholder": "e.g., Al Noor Tower",
+      "nameAr": "Property Name (Arabic)",
+      "nameArPlaceholder": "مثال: برج النور",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Brief description of the property...",
+      "type": "Property Type",
+      "typePlaceholder": "Select type",
+      "location": "Location / District",
+      "locationPlaceholder": "e.g., Al Olaya",
+      "city": "City",
+      "cityPlaceholder": "e.g., Riyadh",
+      "coverImage": "Cover Image URL",
+      "coverImagePlaceholder": "https://...",
+      "submit": "Create Property",
+      "creating": "Creating...",
+      "success": "Property created successfully",
+      "error": "Failed to create property"
+    },
+    "table": {
+      "property": "Property",
+      "type": "Type",
+      "city": "City",
+      "units": "Units",
+      "occupancy": "Occupancy",
+      "revenue": "Revenue (MTD)",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "propertyDetail": {
+    "breadcrumb": {
+      "properties": "Properties"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "units": "Units",
+      "pricing": "Pricing",
+      "media": "Media"
+    },
+    "overview": {
+      "kpi": {
+        "totalUnits": "Total Units",
+        "occupancyRate": "Occupancy Rate",
+        "revenueMTD": "Revenue (MTD)",
+        "avgRentSqm": "Avg Rent/sqm"
+      },
+      "unitStatus": "Unit Status Breakdown",
+      "propertyDetails": "Property Details",
+      "amenities": "Amenities",
+      "buildings": "Buildings",
+      "yearBuilt": "Year Built",
+      "totalArea": "Total Area",
+      "floors": "Floors",
+      "parkingSpots": "Parking Spots",
+      "developer": "Developer",
+      "manager": "Manager",
+      "sqm": "sqm"
+    },
+    "units": {
+      "title": "All Units",
+      "unitNumber": "Unit #",
+      "floor": "Floor",
+      "type": "Type",
+      "area": "Area (m²)",
+      "price": "Price (SAR/yr)",
+      "status": "Status",
+      "tenant": "Tenant",
+      "actions": "Actions"
+    },
+    "pricing": {
+      "title": "Pricing Summary",
+      "avgRent": "Average Annual Rent",
+      "minRent": "Minimum Rent",
+      "maxRent": "Maximum Rent",
+      "discountRequests": "Discount Requests",
+      "noDiscounts": "No discount requests yet"
+    },
+    "media": {
+      "title": "Media Gallery",
+      "allMedia": "All",
+      "exterior": "Exterior",
+      "interior": "Interior",
+      "floorPlans": "Floor Plans",
+      "noMedia": "No media uploaded yet",
+      "noMediaDescription": "Upload photos and documents for this property.",
+      "uploadButton": "Upload Media"
+    },
+    "edit": {
+      "title": "Edit Property",
+      "description": "Update property information.",
+      "success": "Property updated successfully",
+      "error": "Failed to update property"
+    },
+    "empty": {
+      "noUnits": "No units configured yet",
+      "noUnitsDescription": "Add units to this property to start managing inventory.",
+      "noPricing": "No pricing data available",
+      "noBuildings": "No buildings configured"
+    }
+  },
+  "inventory": {
+    "title": "Unit Inventory",
+    "subtitle": "{count} units across {buildings} buildings",
+    "selectBuilding": "Select Building",
+    "allBuildings": "All Buildings",
+    "addUnit": "Add Unit",
+    "bulkImport": "Bulk Import",
+    "gridView": "Grid View",
+    "tableView": "Table View",
+    "searchPlaceholder": "Search units...",
+    "filters": {
+      "status": "Status",
+      "type": "Unit Type",
+      "floor": "Floor",
+      "allStatuses": "All statuses",
+      "allTypes": "All types"
+    },
+    "summary": {
+      "total": "Total Units",
+      "available": "Available",
+      "reserved": "Reserved",
+      "occupied": "Occupied",
+      "blocked": "Blocked",
+      "maintenance": "Maintenance"
+    },
+    "grid": {
+      "floorLabel": "F{floor}",
+      "tooltip": {
+        "unit": "Unit {number}",
+        "type": "Type: {type}",
+        "area": "Area: {area} m²",
+        "price": "Price: {price}/yr",
+        "status": "Status: {status}"
+      }
+    },
+    "table": {
+      "unitNumber": "Unit #",
+      "floor": "Floor",
+      "building": "Building",
+      "type": "Type",
+      "area": "Area (m²)",
+      "bedrooms": "Beds",
+      "bathrooms": "Baths",
+      "price": "Price (SAR/yr)",
+      "status": "Status",
+      "tenant": "Tenant",
+      "actions": "Actions"
+    },
+    "bulk": {
+      "selectedCount": "{count} units selected",
+      "changeStatus": "Change Status",
+      "exportSelected": "Export",
+      "clearSelection": "Clear"
+    },
+    "unitDetail": {
+      "title": "Unit {number}",
+      "building": "Building",
+      "details": "Details",
+      "type": "Type",
+      "area": "Area",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "balcony": "Balcony",
+      "view": "View",
+      "parking": "Parking",
+      "furnished": "Furnished",
+      "pricing": "Pricing",
+      "annualRent": "Annual Rent",
+      "pricePerSqm": "Price/sqm",
+      "lastUpdated": "Last Updated",
+      "tenantInfo": "Tenant Information",
+      "leaseStart": "Lease Start",
+      "leaseEnd": "Lease End",
+      "leaseStatus": "Lease Status",
+      "history": "History",
+      "editUnit": "Edit Unit",
+      "viewLease": "View Lease",
+      "changeStatus": "Change Status",
+      "yes": "Yes",
+      "no": "No",
+      "bookUnit": "Book Unit"
+    },
+    "empty": {
+      "title": "No units configured",
+      "description": "Select a building or add units to start managing your inventory.",
+      "noBuilding": "Select a building to view the inventory grid.",
+      "noResults": "No units match your filters",
+      "noResultsDescription": "Try adjusting your filters to see more units.",
+      "clearFilters": "Clear filters"
+    },
+    "statusChange": {
+      "title": "Change Unit Status",
+      "newStatus": "New Status",
+      "note": "Note (optional)",
+      "notePlaceholder": "Add a note about this status change...",
+      "confirm": "Change Status",
+      "success": "Unit status updated",
+      "error": "Failed to update status"
+    }
+  },
+  "leads": {
+    "title": "Leads & CRM",
+    "subtitle": "{count} active leads",
+    "addLead": "Add Lead",
+    "createLead": "Create Lead",
+    "createLeadDescription": "Fill in the details to add a new lead.",
+    "creating": "Creating...",
+    "importLeads": "Import Leads",
+    "kanbanView": "Kanban",
+    "tableView": "Table",
+    "analyticsView": "Analytics",
+    "searchPlaceholder": "Search leads...",
+    "score": {
+      "hot": "Hot",
+      "warm": "Warm",
+      "cold": "Cold"
+    },
+    "stage": "Stage",
+    "source": "Source",
+    "assignee": "Assignee",
+    "property": "Property",
+    "lastContact": "Last Contact",
+    "nextFollowUp": "Next Follow-up",
+    "contact": "Contact",
+    "interest": "Interest",
+    "tags": "Tags",
+    "assignedAgent": "Assigned Agent",
+    "changeStage": "Change Stage",
+    "activity": "Activity",
+    "notesTab": "Notes",
+    "addNotes": "Add notes about this lead...",
+    "scheduleFollowUp": "Schedule Follow-up",
+    "selectType": "Select type",
+    "date": "Date",
+    "followUpNotes": "Notes about this follow-up...",
+    "scheduleActivity": "Schedule Activity",
+    "emptyStage": "No leads in this stage",
+    "conversionRate": "Conversion Rate",
+    "avgDaysToClose": "Avg. Days to Close",
+    "totalActive": "Total Active",
+    "days": "days",
+    "bulkAssign": "Assign",
+    "bulkStage": "Change Stage",
+    "contactInfo": "Contact Information",
+    "stages": {
+      "new": "New",
+      "contacted": "Contacted",
+      "qualified": "Qualified",
+      "viewing": "Viewing",
+      "negotiation": "Negotiation",
+      "won": "Won",
+      "lost": "Lost"
+    },
+    "sources": {
+      "website": "Website",
+      "walk_in": "Walk-in",
+      "referral": "Referral",
+      "social_media": "Social Media",
+      "phone": "Phone",
+      "partner": "Partner",
+      "other": "Other"
+    },
+    "timelines": {
+      "immediate": "Immediately",
+      "1-3months": "1-3 Months",
+      "3-6months": "3-6 Months",
+      "6plus": "6+ Months"
+    },
+    "interestTypes": {
+      "buy": "Buy",
+      "rent": "Rent"
+    },
+    "propertyTypes": {
+      "apartment": "Apartment",
+      "villa": "Villa",
+      "office": "Office",
+      "land": "Land"
+    },
+    "cities": {
+      "riyadh": "Riyadh",
+      "jeddah": "Jeddah",
+      "dammam": "Dammam",
+      "makkah": "Makkah",
+      "madinah": "Madinah"
+    },
+    "activityTypes": {
+      "call": "Call",
+      "email": "Email",
+      "meeting": "Meeting",
+      "note": "Note"
+    },
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "e.g., Ahmed Al-Qahtani",
+      "nameAr": "Full Name (Arabic)",
+      "nameArPlaceholder": "مثال: أحمد القحطاني",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "emailPlaceholder": "name@company.com",
+      "source": "Source",
+      "selectSource": "Select source",
+      "interestType": "Looking to",
+      "selectInterestType": "Buy or Rent",
+      "propertyType": "Property Type",
+      "selectPropertyType": "Select type",
+      "city": "City",
+      "selectCity": "Select city",
+      "budgetMin": "Budget Min (SAR)",
+      "budgetMax": "Budget Max (SAR)",
+      "bedrooms": "Bedrooms",
+      "timeline": "Timeline",
+      "selectTimeline": "Select timeline",
+      "notesPlaceholder": "Any initial notes about this lead...",
+      "nameRequired": "Name is required"
+    },
+    "empty": {
+      "title": "No leads yet",
+      "description": "Start capturing leads to build your pipeline.",
+      "addFirst": "Add Lead",
+      "importFirst": "Import Leads"
+    },
+    "analytics": {
+      "totalLeads": "Total Leads",
+      "conversionRate": "Conversion Rate",
+      "avgCloseTime": "Avg. Close Time",
+      "hotLeads": "Hot Leads",
+      "pipelineFunnel": "Pipeline Funnel",
+      "bySource": "Leads by Source",
+      "scoreDistribution": "Score Distribution",
+      "newLeadsTrend": "New Leads Trend",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "topBrokers": "Top Brokers",
+      "broker": "Broker",
+      "leadsAssigned": "Assigned",
+      "leadsWon": "Won",
+      "convRate": "Conv. Rate",
+      "avgResponse": "Avg. Response"
+    },
+    "duplicates": {
+      "title": "Potential Duplicates Found",
+      "description": "We found leads that may match the one you are creating.",
+      "score": "Score",
+      "lastActivity": "Last activity",
+      "viewExisting": "View",
+      "merge": "Merge",
+      "createAnyway": "Create Anyway",
+      "cancel": "Cancel",
+      "confidence": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      }
+    },
+    "merge": {
+      "title": "Merge Leads",
+      "description": "Select which values to keep for the merged lead.",
+      "newLead": "New Lead",
+      "existingLead": "Existing Lead",
+      "preview": "Merged Result Preview",
+      "confirmMerge": "Confirm Merge",
+      "fields": {
+        "name": "Full Name",
+        "nameAr": "Full Name (Arabic)",
+        "phone": "Phone Number",
+        "email": "Email Address"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your company profile, team, and billing",
+    "nav": {
+      "general": "General",
+      "users": "Users",
+      "roles": "Roles & Permissions",
+      "subscription": "Subscription",
+      "localization": "Localization",
+      "notifications": "Notifications",
+      "security": "Security"
+    },
+    "general": {
+      "companyProfile": "Company Profile",
+      "changeLogo": "Change Logo",
+      "logoHint": "JPG, PNG or SVG. Max 2MB.",
+      "nameEn": "Company Name (English)",
+      "nameAr": "Company Name (Arabic)",
+      "vatNumber": "VAT Number",
+      "crNumber": "CR Number",
+      "address": "Address",
+      "street": "Street",
+      "city": "City",
+      "district": "District",
+      "postalCode": "Postal Code",
+      "contactInfo": "Contact Information",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website"
+    },
+    "users": {
+      "title": "Team Members",
+      "inviteUser": "Invite User",
+      "inviteDescription": "Send an invitation to join your team.",
+      "email": "Email",
+      "role": "Role",
+      "selectRole": "Select role",
+      "sendInvite": "Send Invitation",
+      "lastActive": "Last Active",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "remove": "Remove",
+      "roles": {
+        "admin": "Admin",
+        "manager": "Manager",
+        "agent": "Agent",
+        "viewer": "Viewer"
+      },
+      "statuses": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "roles": {
+      "title": "Roles & Permissions",
+      "system": "System",
+      "users": "users",
+      "module": "Module",
+      "view": "View",
+      "create": "Create",
+      "edit": "Edit",
+      "delete": "Delete",
+      "export": "Export"
+    },
+    "subscription": {
+      "currentPlan": "Current Plan",
+      "nextBilling": "Next billing date",
+      "month": "month",
+      "comparePlans": "Compare Plans",
+      "current": "Current Plan",
+      "upgrade": "Upgrade",
+      "contactSales": "Contact Sales",
+      "custom": "Custom",
+      "unlimited": "Unlimited",
+      "properties": "Properties",
+      "users": "Users",
+      "storage": "Storage",
+      "plans": {
+        "starter": "Starter",
+        "professional": "Professional",
+        "enterprise": "Enterprise"
+      },
+      "features": {
+        "basic_analytics": "Basic Analytics",
+        "email_support": "Email Support",
+        "advanced_analytics": "Advanced Analytics",
+        "priority_support": "Priority Support",
+        "api_access": "API Access",
+        "custom_roles": "Custom Roles",
+        "dedicated_support": "Dedicated Support",
+        "sla": "SLA Guarantee",
+        "custom_integrations": "Custom Integrations",
+        "white_label": "White Label",
+        "unlimited": "Unlimited Everything",
+        "inventory_management": "Inventory Management",
+        "lead_management": "Lead Management",
+        "campaign_pricing": "Campaign Pricing",
+        "duplicate_detection": "Duplicate Detection",
+        "bulk_operations": "Bulk Operations",
+        "hijri_calendar": "Hijri Calendar",
+        "advanced_reporting": "Advanced Reporting",
+        "audit_log": "Audit Log"
+      },
+      "units": "Units",
+      "downgrade": "Downgrade",
+      "featureMatrix": "Feature Comparison",
+      "feature": "Feature",
+      "billingHistory": "Billing History",
+      "billingDate": "Date",
+      "billingAmount": "Amount",
+      "billingStatus": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "failed": "Failed"
+      },
+      "confirmUpgrade": "Confirm Upgrade",
+      "confirmDowngrade": "Confirm Downgrade",
+      "upgradeDescription": "You are about to upgrade your subscription plan. The new price will apply from the next billing cycle.",
+      "downgradeDescription": "You are about to downgrade your subscription plan. Some features may become unavailable.",
+      "from": "From",
+      "to": "To",
+      "newPrice": "New Price",
+      "upgradeSuccess": "Plan upgraded successfully",
+      "upgradeError": "Failed to upgrade plan",
+      "downgradeSuccess": "Plan downgraded successfully",
+      "downgradeError": "Failed to downgrade plan"
+    },
+    "localization": {
+      "title": "Localization",
+      "language": "Default Language",
+      "calendar": "Primary Calendar",
+      "hijri": "Hijri (Islamic)",
+      "gregorian": "Gregorian",
+      "dateFormat": "Date Format",
+      "hijriOnly": "Hijri only",
+      "gregorianOnly": "Gregorian only",
+      "both": "Both (Hijri + Gregorian)",
+      "timeFormat": "Time Format",
+      "currency": "Currency",
+      "sar": "Saudi Riyal",
+      "aed": "UAE Dirham",
+      "usd": "US Dollar",
+      "timezone": "Timezone",
+      "firstDay": "First Day of Week",
+      "sunday": "Sunday",
+      "saturday": "Saturday",
+      "monday": "Monday",
+      "numberFormat": "Number Format",
+      "saveSuccess": "Localization settings saved",
+      "saveError": "Failed to save localization settings"
+    },
+    "notifications": {
+      "title": "Notification Preferences",
+      "category": "Notification Type",
+      "inApp": "In-App",
+      "email": "Email",
+      "sms": "SMS"
+    },
+    "security": {
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updatePassword": "Update Password",
+      "twoFactor": "Two-Factor Authentication",
+      "twoFactorDescription": "Add an extra layer of security to your account with two-factor authentication.",
+      "activeSessions": "Active Sessions",
+      "currentSession": "Current",
+      "revoke": "Revoke"
+    }
+  },
+  "bookings": {
+    "title": "Bookings",
+    "subtitle": "{count} bookings",
+    "newBooking": "New Booking",
+    "newBookingSubtitle": "Create a new booking with a step-by-step wizard",
+    "searchPlaceholder": "Search by unit or client...",
+    "filterStatus": "Filter by status",
+    "createSuccess": "Booking created successfully",
+    "createError": "Failed to create booking",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "expired": "Expired",
+      "completed": "Completed"
+    },
+    "table": {
+      "unit": "Unit",
+      "client": "Client",
+      "totalPrice": "Total Price",
+      "createdAt": "Created"
+    },
+    "empty": {
+      "title": "No bookings yet",
+      "description": "Create your first booking to start managing sales."
+    },
+    "detail": {
+      "title": "Booking {id}",
+      "timeline": "Status Timeline",
+      "unitInfo": "Unit Information",
+      "unit": "Unit",
+      "clientInfo": "Client Information",
+      "paymentPlan": "Payment Plan",
+      "dueDate": "Due Date",
+      "cancelReason": "Cancellation Reason"
+    },
+    "timeline": {
+      "created": "Created",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "installmentStatus": {
+      "paid": "Paid",
+      "pending": "Pending",
+      "overdue": "Overdue"
+    },
+    "actions": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "complete": "Complete"
+    },
+    "cancel": {
+      "title": "Cancel Booking",
+      "description": "Are you sure you want to cancel this booking? This action cannot be undone.",
+      "reason": "Cancellation Reason",
+      "reasonPlaceholder": "Enter the reason for cancellation..."
+    },
+    "wizard": {
+      "step1": "Select Unit",
+      "step2": "Client Info",
+      "step3": "Payment Plan",
+      "step4": "Review",
+      "searchUnits": "Search units...",
+      "noUnitsFound": "No units found",
+      "unitLabel": "Unit {number}",
+      "existingLead": "Existing Lead",
+      "newClient": "New Client",
+      "searchLeads": "Search leads by name or phone...",
+      "clientName": "Full Name",
+      "clientNamePlaceholder": "e.g., Ahmed Al-Qahtani",
+      "clientNameAr": "Full Name (Arabic)",
+      "clientNameArPlaceholder": "مثال: أحمد القحطاني",
+      "clientPhone": "Phone Number",
+      "clientEmail": "Email Address",
+      "nationalId": "National ID",
+      "nationalIdPlaceholder": "e.g., 1099887766",
+      "totalPrice": "Total Price (SAR)",
+      "downPayment": "Down Payment (SAR)",
+      "installments": "Installments",
+      "installmentAmount": "Installment Amount",
+      "months": "months",
+      "remaining": "Remaining Balance",
+      "monthlyPayment": "Monthly Payment",
+      "schedulePreview": "Payment Schedule Preview",
+      "moreInstallments": "more installments",
+      "confirmBooking": "Confirm Booking"
+    }
+  },
+  "campaigns": {
+    "title": "Campaigns",
+    "subtitle": "{count} campaigns",
+    "createCampaign": "Create Campaign",
+    "createDescription": "Create a new pricing campaign for your properties.",
+    "searchPlaceholder": "Search campaigns...",
+    "filterStatus": "Filter by status",
+    "createSuccess": "Campaign created successfully",
+    "createError": "Failed to create campaign",
+    "units": "units",
+    "status": {
+      "draft": "Draft",
+      "active": "Active",
+      "ended": "Ended",
+      "paused": "Paused"
+    },
+    "empty": {
+      "title": "No campaigns yet",
+      "description": "Create your first campaign to offer discounts on properties."
+    },
+    "form": {
+      "name": "Campaign Name",
+      "nameAr": "Campaign Name (Arabic)",
+      "namePlaceholder": "e.g., Ramadan Offer",
+      "nameArPlaceholder": "مثال: عرض رمضان",
+      "descriptionPlaceholder": "Brief description of the campaign...",
+      "discount": "Discount Settings",
+      "discountType": "Type",
+      "percentage": "Percentage",
+      "fixedAmount": "Fixed Amount",
+      "discountValue": "Value",
+      "dates": "Campaign Period",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "stats": {
+      "unitsAffected": "Units Affected",
+      "unitsSold": "Units Sold",
+      "revenueImpact": "Revenue Impact"
+    },
+    "detail": {
+      "period": "Campaign Period",
+      "discount": "Discount",
+      "affectedUnits": "Affected Units"
+    }
+  }
+}

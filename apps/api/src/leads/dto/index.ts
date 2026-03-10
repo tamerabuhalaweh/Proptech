@@ -1,0 +1,12 @@
+export { CreateLeadDto } from './create-lead.dto';
+export { UpdateLeadDto } from './update-lead.dto';
+export { QueryLeadDto } from './query-lead.dto';
+export { ChangeStageDto } from './change-stage.dto';
+export { AssignLeadDto } from './assign-lead.dto';
+export { OverrideScoreDto } from './override-score.dto';
+export { AssignmentRuleDto, AssignmentStrategy } from './assignment-rule.dto';
+export { CreateLeadActivityDto } from './create-lead-activity.dto';
+export { UpdateLeadActivityDto } from './update-lead-activity.dto';
+export { CompleteActivityDto } from './complete-activity.dto';
+export { QueryActivityDto } from './query-activity.dto';
+export { CheckDuplicatesDto } from './check-duplicates.dto';

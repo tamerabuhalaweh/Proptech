@@ -1,0 +1,966 @@
+{
+  "common": {
+    "appName": "بروبتك",
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ ما",
+    "retry": "حاول مرة أخرى",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "add": "إضافة",
+    "search": "بحث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "import": "استيراد",
+    "close": "إغلاق",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "submit": "إرسال",
+    "viewAll": "عرض الكل",
+    "noResults": "لا توجد نتائج",
+    "clearAll": "مسح الكل",
+    "selectAll": "تحديد الكل",
+    "markAllRead": "تحديد الكل كمقروء",
+    "showing": "عرض {from}-{to} من {total}",
+    "perPage": "لكل صفحة",
+    "selected": "{count} محدد",
+    "actions": "إجراءات",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "description": "الوصف",
+    "name": "الاسم",
+    "type": "النوع",
+    "status": "الحالة",
+    "city": "المدينة",
+    "location": "الموقع",
+    "area": "المساحة",
+    "price": "السعر",
+    "floor": "الطابق",
+    "total": "الإجمالي",
+    "details": "التفاصيل",
+    "overview": "نظرة عامة",
+    "all": "الكل"
+  },
+  "navigation": {
+    "dashboard": "لوحة التحكم",
+    "properties": "العقارات",
+    "allProperties": "جميع العقارات",
+    "inventoryGrid": "شبكة الوحدات",
+    "addProperty": "إضافة عقار",
+    "leads": "العملاء المحتملين",
+    "tenants": "المستأجرين",
+    "finance": "المالية",
+    "invoices": "الفواتير",
+    "payments": "المدفوعات",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "help": "المساعدة والدعم",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "switchTenant": "تبديل المنشأة",
+    "collapseSidebar": "طي القائمة الجانبية",
+    "expandSidebar": "توسيع القائمة الجانبية",
+    "bookings": "الحجوزات",
+    "campaigns": "الحملات"
+  },
+  "topbar": {
+    "search": "البحث في العقارات، العملاء، المستأجرين...",
+    "searchShortcut": "⌘K",
+    "notifications": "الإشعارات",
+    "notificationsCount": "{count} إشعارات غير مقروءة",
+    "noNotifications": "لا توجد إشعارات جديدة!",
+    "switchLanguage": "English",
+    "toggleTheme": "تبديل المظهر",
+    "lightMode": "الوضع الفاتح",
+    "darkMode": "الوضع الداكن"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "greeting": {
+      "morning": "صباح الخير، {name}",
+      "afternoon": "مساء الخير، {name}",
+      "evening": "مساء الخير، {name}"
+    },
+    "dateRange": "آخر 30 يوم",
+    "kpi": {
+      "totalProperties": "إجمالي العقارات",
+      "occupancyRate": "نسبة الإشغال",
+      "revenueMTD": "الإيرادات (الشهر الحالي)",
+      "activeLeads": "العملاء النشطين",
+      "vsLastMonth": "مقارنة بالشهر الماضي",
+      "newThisWeek": "جديد هذا الأسبوع",
+      "thisMonth": "هذا الشهر"
+    },
+    "charts": {
+      "revenueTrend": "اتجاه الإيرادات",
+      "monthly": "شهري",
+      "quarterly": "ربع سنوي",
+      "unitStatus": "حالة الوحدات",
+      "totalUnits": "إجمالي الوحدات"
+    },
+    "activity": {
+      "title": "النشاط الأخير",
+      "viewAll": "عرض جميع الأنشطة",
+      "leadAssigned": "تم تعيين عميل",
+      "paymentReceived": "تم استلام دفعة",
+      "leaseExpiring": "عقد إيجار ينتهي قريباً",
+      "maintenanceOverdue": "صيانة متأخرة",
+      "propertyAdded": "تمت إضافة عقار",
+      "unitStatusChanged": "تم تغيير حالة الوحدة",
+      "timeAgo": {
+        "justNow": "الآن",
+        "minutesAgo": "منذ {count} دقيقة",
+        "hoursAgo": "منذ {count} ساعة",
+        "daysAgo": "منذ {count} يوم"
+      }
+    },
+    "quickActions": {
+      "title": "إجراءات سريعة",
+      "addProperty": "إضافة عقار",
+      "newLead": "عميل جديد",
+      "generateReport": "إنشاء تقرير",
+      "viewInventory": "عرض المخزون"
+    },
+    "upcoming": {
+      "title": "القادم",
+      "leaseRenewals": "{count} تجديدات عقود مستحقة هذا الأسبوع",
+      "propertyVisits": "{count} زيارات عقارية مجدولة اليوم"
+    },
+    "topProperties": {
+      "title": "أفضل العقارات حسب الإيرادات",
+      "property": "العقار",
+      "units": "الوحدات",
+      "occupancy": "الإشغال",
+      "revenue": "الإيرادات",
+      "trend": "الاتجاه"
+    },
+    "empty": {
+      "noProperties": "أضف أول عقار لرؤية المقاييس",
+      "addProperty": "إضافة عقار",
+      "noRevenue": "لا توجد بيانات إيرادات بعد",
+      "noActivity": "لا يوجد نشاط حديث"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى حسابك في بروبتك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "name@company.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "rememberMe": "تذكرني",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "signIn": "تسجيل الدخول",
+      "signingIn": "جارٍ تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب",
+      "orContinue": "أو تابع باستخدام",
+      "google": "جوجل",
+      "microsoft": "مايكروسوفت"
+    },
+    "register": {
+      "title": "أنشئ حسابك",
+      "subtitle": "ابدأ إدارة عقاراتك مع بروبتك",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أحمد القحطاني",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "name@company.com",
+      "company": "اسم الشركة",
+      "companyPlaceholder": "اسم شركتك",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة مرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أكّد كلمة المرور",
+      "agreeTerms": "أوافق على {terms} و {privacy}",
+      "termsOfService": "شروط الخدمة",
+      "privacyPolicy": "سياسة الخصوصية",
+      "signUp": "إنشاء حساب",
+      "signingUp": "جارٍ إنشاء الحساب...",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "passwordRequirements": "٨ أحرف على الأقل تتضمن حرف كبير وصغير ورقم"
+    },
+    "forgotPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "name@company.com",
+      "sendLink": "إرسال رابط إعادة التعيين",
+      "sending": "جارٍ الإرسال...",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "checkEmail": "تحقق من بريدك الإلكتروني",
+      "checkEmailDescription": "أرسلنا رابط إعادة تعيين كلمة المرور إلى {email}",
+      "resend": "لم تستلم البريد؟ إعادة إرسال"
+    },
+    "errors": {
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMin": "كلمة المرور يجب أن تكون ٨ أحرف على الأقل",
+      "passwordMatch": "كلمتا المرور غير متطابقتين",
+      "nameRequired": "الاسم الكامل مطلوب",
+      "companyRequired": "اسم الشركة مطلوب",
+      "agreeRequired": "يجب الموافقة على الشروط"
+    }
+  },
+  "unitStatus": {
+    "available": "متاح",
+    "reserved": "محجوز",
+    "sold": "مباع",
+    "occupied": "مشغول",
+    "blocked": "محظور",
+    "maintenance": "صيانة"
+  },
+  "propertyStatus": {
+    "active": "نشط",
+    "under_construction": "قيد الإنشاء",
+    "completed": "مكتمل",
+    "archived": "مؤرشف"
+  },
+  "propertyType": {
+    "residential": "سكني",
+    "commercial": "تجاري",
+    "mixed": "متعدد الاستخدام",
+    "land": "أرض"
+  },
+  "unitType": {
+    "studio": "استوديو",
+    "1br": "غرفة واحدة",
+    "2br": "غرفتين",
+    "3br": "3 غرف",
+    "4br": "4 غرف",
+    "penthouse": "بنتهاوس",
+    "commercial": "تجاري",
+    "retail": "تجزئة"
+  },
+  "properties": {
+    "title": "العقارات",
+    "subtitle": "{count} عقار",
+    "addProperty": "إضافة عقار",
+    "searchPlaceholder": "البحث في العقارات...",
+    "gridView": "عرض شبكي",
+    "listView": "عرض قائمة",
+    "sortBy": "ترتيب حسب",
+    "sort": {
+      "nameAsc": "الاسم (أ-ي)",
+      "nameDesc": "الاسم (ي-أ)",
+      "newest": "الأحدث أولاً",
+      "oldest": "الأقدم أولاً",
+      "occupancyHigh": "الإشغال (الأعلى)",
+      "occupancyLow": "الإشغال (الأقل)",
+      "unitsHigh": "الوحدات (الأكثر)",
+      "unitsLow": "الوحدات (الأقل)",
+      "revenueHigh": "الإيرادات (الأعلى)",
+      "revenueLow": "الإيرادات (الأقل)"
+    },
+    "filters": {
+      "type": "نوع العقار",
+      "status": "الحالة",
+      "city": "المدينة",
+      "clearFilters": "مسح الفلاتر"
+    },
+    "card": {
+      "units": "{count} وحدة",
+      "occupancy": "{value}% إشغال",
+      "viewProperty": "عرض العقار",
+      "moreActions": "إجراءات أخرى",
+      "editProperty": "تعديل",
+      "archiveProperty": "أرشفة",
+      "deleteProperty": "حذف"
+    },
+    "empty": {
+      "title": "لا توجد عقارات بعد",
+      "description": "ابدأ بإضافة أول عقار لإدارة الوحدات والمستأجرين والمالية.",
+      "addFirst": "إضافة عقار"
+    },
+    "emptySearch": {
+      "title": "لم يتم العثور على عقارات",
+      "description": "لا توجد عقارات تطابق البحث أو الفلاتر. حاول تعديل معاييرك.",
+      "clearFilters": "مسح الفلاتر"
+    },
+    "create": {
+      "title": "إضافة عقار جديد",
+      "description": "أدخل التفاصيل لإنشاء عقار جديد.",
+      "name": "اسم العقار",
+      "namePlaceholder": "مثال: برج النور",
+      "nameAr": "اسم العقار (عربي)",
+      "nameArPlaceholder": "مثال: برج النور",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "وصف مختصر للعقار...",
+      "type": "نوع العقار",
+      "typePlaceholder": "اختر النوع",
+      "location": "الموقع / الحي",
+      "locationPlaceholder": "مثال: العليا",
+      "city": "المدينة",
+      "cityPlaceholder": "مثال: الرياض",
+      "coverImage": "رابط صورة الغلاف",
+      "coverImagePlaceholder": "https://...",
+      "submit": "إنشاء العقار",
+      "creating": "جارٍ الإنشاء...",
+      "success": "تم إنشاء العقار بنجاح",
+      "error": "فشل إنشاء العقار"
+    },
+    "table": {
+      "property": "العقار",
+      "type": "النوع",
+      "city": "المدينة",
+      "units": "الوحدات",
+      "occupancy": "الإشغال",
+      "revenue": "الإيرادات (الشهر)",
+      "status": "الحالة",
+      "actions": "إجراءات"
+    }
+  },
+  "propertyDetail": {
+    "breadcrumb": {
+      "properties": "العقارات"
+    },
+    "tabs": {
+      "overview": "نظرة عامة",
+      "units": "الوحدات",
+      "pricing": "التسعير",
+      "media": "الوسائط"
+    },
+    "overview": {
+      "kpi": {
+        "totalUnits": "إجمالي الوحدات",
+        "occupancyRate": "نسبة الإشغال",
+        "revenueMTD": "الإيرادات (الشهر)",
+        "avgRentSqm": "متوسط الإيجار/م²"
+      },
+      "unitStatus": "توزيع حالة الوحدات",
+      "propertyDetails": "تفاصيل العقار",
+      "amenities": "المرافق",
+      "buildings": "المباني",
+      "yearBuilt": "سنة البناء",
+      "totalArea": "المساحة الإجمالية",
+      "floors": "الطوابق",
+      "parkingSpots": "مواقف السيارات",
+      "developer": "المطور",
+      "manager": "المدير",
+      "sqm": "م²"
+    },
+    "units": {
+      "title": "جميع الوحدات",
+      "unitNumber": "رقم الوحدة",
+      "floor": "الطابق",
+      "type": "النوع",
+      "area": "المساحة (م²)",
+      "price": "السعر (ر.س/سنة)",
+      "status": "الحالة",
+      "tenant": "المستأجر",
+      "actions": "إجراءات"
+    },
+    "pricing": {
+      "title": "ملخص التسعير",
+      "avgRent": "متوسط الإيجار السنوي",
+      "minRent": "أدنى إيجار",
+      "maxRent": "أعلى إيجار",
+      "discountRequests": "طلبات الخصم",
+      "noDiscounts": "لا توجد طلبات خصم بعد"
+    },
+    "media": {
+      "title": "معرض الوسائط",
+      "allMedia": "الكل",
+      "exterior": "خارجي",
+      "interior": "داخلي",
+      "floorPlans": "مخططات الطوابق",
+      "noMedia": "لا توجد وسائط بعد",
+      "noMediaDescription": "ارفع صور ومستندات لهذا العقار.",
+      "uploadButton": "رفع وسائط"
+    },
+    "edit": {
+      "title": "تعديل العقار",
+      "description": "تحديث معلومات العقار.",
+      "success": "تم تحديث العقار بنجاح",
+      "error": "فشل تحديث العقار"
+    },
+    "empty": {
+      "noUnits": "لم يتم إعداد الوحدات بعد",
+      "noUnitsDescription": "أضف وحدات لهذا العقار لبدء إدارة المخزون.",
+      "noPricing": "لا توجد بيانات تسعير",
+      "noBuildings": "لم يتم إعداد المباني"
+    }
+  },
+  "inventory": {
+    "title": "مخزون الوحدات",
+    "subtitle": "{count} وحدة في {buildings} مبنى",
+    "selectBuilding": "اختر المبنى",
+    "allBuildings": "جميع المباني",
+    "addUnit": "إضافة وحدة",
+    "bulkImport": "استيراد جماعي",
+    "gridView": "عرض شبكي",
+    "tableView": "عرض جدول",
+    "searchPlaceholder": "البحث في الوحدات...",
+    "filters": {
+      "status": "الحالة",
+      "type": "نوع الوحدة",
+      "floor": "الطابق",
+      "allStatuses": "جميع الحالات",
+      "allTypes": "جميع الأنواع"
+    },
+    "summary": {
+      "total": "إجمالي الوحدات",
+      "available": "متاح",
+      "reserved": "محجوز",
+      "occupied": "مشغول",
+      "blocked": "محظور",
+      "maintenance": "صيانة"
+    },
+    "grid": {
+      "floorLabel": "ط{floor}",
+      "tooltip": {
+        "unit": "وحدة {number}",
+        "type": "النوع: {type}",
+        "area": "المساحة: {area} م²",
+        "price": "السعر: {price}/سنة",
+        "status": "الحالة: {status}"
+      }
+    },
+    "table": {
+      "unitNumber": "رقم الوحدة",
+      "floor": "الطابق",
+      "building": "المبنى",
+      "type": "النوع",
+      "area": "المساحة (م²)",
+      "bedrooms": "غرف",
+      "bathrooms": "حمامات",
+      "price": "السعر (ر.س/سنة)",
+      "status": "الحالة",
+      "tenant": "المستأجر",
+      "actions": "إجراءات"
+    },
+    "bulk": {
+      "selectedCount": "{count} وحدة محددة",
+      "changeStatus": "تغيير الحالة",
+      "exportSelected": "تصدير",
+      "clearSelection": "مسح"
+    },
+    "unitDetail": {
+      "title": "وحدة {number}",
+      "building": "المبنى",
+      "details": "التفاصيل",
+      "type": "النوع",
+      "area": "المساحة",
+      "bedrooms": "غرف النوم",
+      "bathrooms": "الحمامات",
+      "balcony": "شرفة",
+      "view": "الإطلالة",
+      "parking": "موقف السيارة",
+      "furnished": "مفروش",
+      "pricing": "التسعير",
+      "annualRent": "الإيجار السنوي",
+      "pricePerSqm": "السعر/م²",
+      "lastUpdated": "آخر تحديث",
+      "tenantInfo": "معلومات المستأجر",
+      "leaseStart": "بداية العقد",
+      "leaseEnd": "نهاية العقد",
+      "leaseStatus": "حالة العقد",
+      "history": "السجل",
+      "editUnit": "تعديل الوحدة",
+      "viewLease": "عرض العقد",
+      "changeStatus": "تغيير الحالة",
+      "yes": "نعم",
+      "no": "لا",
+      "bookUnit": "حجز الوحدة"
+    },
+    "empty": {
+      "title": "لم يتم إعداد الوحدات",
+      "description": "اختر مبنى أو أضف وحدات لبدء إدارة المخزون.",
+      "noBuilding": "اختر مبنى لعرض شبكة الوحدات.",
+      "noResults": "لا توجد وحدات تطابق الفلاتر",
+      "noResultsDescription": "حاول تعديل الفلاتر لعرض المزيد من الوحدات.",
+      "clearFilters": "مسح الفلاتر"
+    },
+    "statusChange": {
+      "title": "تغيير حالة الوحدة",
+      "newStatus": "الحالة الجديدة",
+      "note": "ملاحظة (اختياري)",
+      "notePlaceholder": "أضف ملاحظة حول تغيير الحالة...",
+      "confirm": "تغيير الحالة",
+      "success": "تم تحديث حالة الوحدة",
+      "error": "فشل تحديث الحالة"
+    }
+  },
+  "leads": {
+    "title": "العملاء المحتملين",
+    "subtitle": "{count} عميل نشط",
+    "addLead": "إضافة عميل",
+    "createLead": "إنشاء عميل محتمل",
+    "createLeadDescription": "أدخل التفاصيل لإضافة عميل محتمل جديد.",
+    "creating": "جارٍ الإنشاء...",
+    "importLeads": "استيراد العملاء",
+    "kanbanView": "لوحة كانبان",
+    "tableView": "جدول",
+    "analyticsView": "التحليلات",
+    "searchPlaceholder": "البحث في العملاء...",
+    "score": {
+      "hot": "ساخن",
+      "warm": "دافئ",
+      "cold": "بارد"
+    },
+    "stage": "المرحلة",
+    "source": "المصدر",
+    "assignee": "المسؤول",
+    "property": "العقار",
+    "lastContact": "آخر تواصل",
+    "nextFollowUp": "المتابعة القادمة",
+    "contact": "التواصل",
+    "interest": "الاهتمام",
+    "tags": "العلامات",
+    "assignedAgent": "الوكيل المسؤول",
+    "changeStage": "تغيير المرحلة",
+    "activity": "النشاط",
+    "notesTab": "الملاحظات",
+    "addNotes": "أضف ملاحظات حول هذا العميل...",
+    "scheduleFollowUp": "جدولة متابعة",
+    "selectType": "اختر النوع",
+    "date": "التاريخ",
+    "followUpNotes": "ملاحظات حول هذه المتابعة...",
+    "scheduleActivity": "جدولة النشاط",
+    "emptyStage": "لا يوجد عملاء في هذه المرحلة",
+    "conversionRate": "معدل التحويل",
+    "avgDaysToClose": "متوسط أيام الإغلاق",
+    "totalActive": "إجمالي النشطين",
+    "days": "أيام",
+    "bulkAssign": "تعيين",
+    "bulkStage": "تغيير المرحلة",
+    "contactInfo": "معلومات التواصل",
+    "stages": {
+      "new": "جديد",
+      "contacted": "تم التواصل",
+      "qualified": "مؤهل",
+      "viewing": "معاينة",
+      "negotiation": "تفاوض",
+      "won": "مكتسب",
+      "lost": "مفقود"
+    },
+    "sources": {
+      "website": "الموقع الإلكتروني",
+      "walk_in": "زيارة مباشرة",
+      "referral": "إحالة",
+      "social_media": "وسائل التواصل",
+      "phone": "هاتف",
+      "partner": "شريك",
+      "other": "أخرى"
+    },
+    "timelines": {
+      "immediate": "فوري",
+      "1-3months": "١-٣ أشهر",
+      "3-6months": "٣-٦ أشهر",
+      "6plus": "٦+ أشهر"
+    },
+    "interestTypes": {
+      "buy": "شراء",
+      "rent": "إيجار"
+    },
+    "propertyTypes": {
+      "apartment": "شقة",
+      "villa": "فيلا",
+      "office": "مكتب",
+      "land": "أرض"
+    },
+    "cities": {
+      "riyadh": "الرياض",
+      "jeddah": "جدة",
+      "dammam": "الدمام",
+      "makkah": "مكة المكرمة",
+      "madinah": "المدينة المنورة"
+    },
+    "activityTypes": {
+      "call": "اتصال",
+      "email": "بريد إلكتروني",
+      "meeting": "اجتماع",
+      "note": "ملاحظة"
+    },
+    "form": {
+      "name": "الاسم الكامل",
+      "namePlaceholder": "مثال: أحمد القحطاني",
+      "nameAr": "الاسم الكامل (عربي)",
+      "nameArPlaceholder": "مثال: أحمد القحطاني",
+      "phone": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "name@company.com",
+      "source": "المصدر",
+      "selectSource": "اختر المصدر",
+      "interestType": "يبحث عن",
+      "selectInterestType": "شراء أو إيجار",
+      "propertyType": "نوع العقار",
+      "selectPropertyType": "اختر النوع",
+      "city": "المدينة",
+      "selectCity": "اختر المدينة",
+      "budgetMin": "الميزانية (أدنى)",
+      "budgetMax": "الميزانية (أعلى)",
+      "bedrooms": "غرف النوم",
+      "timeline": "الإطار الزمني",
+      "selectTimeline": "اختر الإطار الزمني",
+      "notesPlaceholder": "أي ملاحظات أولية حول هذا العميل...",
+      "nameRequired": "الاسم مطلوب"
+    },
+    "empty": {
+      "title": "لا يوجد عملاء بعد",
+      "description": "ابدأ بإضافة عملاء محتملين لبناء خط المبيعات.",
+      "addFirst": "إضافة عميل",
+      "importFirst": "استيراد العملاء"
+    },
+    "analytics": {
+      "totalLeads": "إجمالي العملاء",
+      "conversionRate": "معدل التحويل",
+      "avgCloseTime": "متوسط وقت الإغلاق",
+      "hotLeads": "عملاء ساخنين",
+      "pipelineFunnel": "قمع المبيعات",
+      "bySource": "العملاء حسب المصدر",
+      "scoreDistribution": "توزيع التقييم",
+      "newLeadsTrend": "اتجاه العملاء الجدد",
+      "daily": "يومي",
+      "weekly": "أسبوعي",
+      "monthly": "شهري",
+      "topBrokers": "أفضل الوسطاء",
+      "broker": "الوسيط",
+      "leadsAssigned": "المعينين",
+      "leadsWon": "المكتسبين",
+      "convRate": "معدل التحويل",
+      "avgResponse": "متوسط الاستجابة"
+    },
+    "duplicates": {
+      "title": "تم العثور على تكرارات محتملة",
+      "description": "وجدنا عملاء محتملين قد يتطابقون مع العميل الذي تقوم بإنشائه.",
+      "score": "النقاط",
+      "lastActivity": "آخر نشاط",
+      "viewExisting": "عرض",
+      "merge": "دمج",
+      "createAnyway": "إنشاء على أي حال",
+      "cancel": "إلغاء",
+      "confidence": {
+        "high": "مرتفع",
+        "medium": "متوسط",
+        "low": "منخفض"
+      }
+    },
+    "merge": {
+      "title": "دمج العملاء المحتملين",
+      "description": "اختر القيم التي تريد الاحتفاظ بها للعميل المدمج.",
+      "newLead": "العميل الجديد",
+      "existingLead": "العميل الحالي",
+      "preview": "معاينة النتيجة المدمجة",
+      "confirmMerge": "تأكيد الدمج",
+      "fields": {
+        "name": "الاسم الكامل",
+        "nameAr": "الاسم الكامل (عربي)",
+        "phone": "رقم الهاتف",
+        "email": "البريد الإلكتروني"
+      }
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة الملف التعريفي للشركة والفريق والفوترة",
+    "nav": {
+      "general": "عام",
+      "users": "المستخدمين",
+      "roles": "الأدوار والصلاحيات",
+      "subscription": "الاشتراك",
+      "localization": "التعريب",
+      "notifications": "الإشعارات",
+      "security": "الأمان"
+    },
+    "general": {
+      "companyProfile": "الملف التعريفي للشركة",
+      "changeLogo": "تغيير الشعار",
+      "logoHint": "JPG أو PNG أو SVG. الحد الأقصى 2 ميغابايت.",
+      "nameEn": "اسم الشركة (إنجليزي)",
+      "nameAr": "اسم الشركة (عربي)",
+      "vatNumber": "الرقم الضريبي",
+      "crNumber": "رقم السجل التجاري",
+      "address": "العنوان",
+      "street": "الشارع",
+      "city": "المدينة",
+      "district": "الحي",
+      "postalCode": "الرمز البريدي",
+      "contactInfo": "معلومات التواصل",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "website": "الموقع الإلكتروني"
+    },
+    "users": {
+      "title": "أعضاء الفريق",
+      "inviteUser": "دعوة مستخدم",
+      "inviteDescription": "أرسل دعوة للانضمام إلى فريقك.",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "selectRole": "اختر الدور",
+      "sendInvite": "إرسال الدعوة",
+      "lastActive": "آخر نشاط",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "remove": "إزالة",
+      "roles": {
+        "admin": "مدير النظام",
+        "manager": "مدير",
+        "agent": "وكيل",
+        "viewer": "مشاهد"
+      },
+      "statuses": {
+        "active": "نشط",
+        "inactive": "غير نشط"
+      }
+    },
+    "roles": {
+      "title": "الأدوار والصلاحيات",
+      "system": "نظام",
+      "users": "مستخدمين",
+      "module": "الوحدة",
+      "view": "عرض",
+      "create": "إنشاء",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "export": "تصدير"
+    },
+    "subscription": {
+      "currentPlan": "الخطة الحالية",
+      "nextBilling": "تاريخ الفاتورة القادمة",
+      "month": "شهر",
+      "comparePlans": "مقارنة الخطط",
+      "current": "الخطة الحالية",
+      "upgrade": "ترقية",
+      "contactSales": "تواصل مع المبيعات",
+      "custom": "مخصص",
+      "unlimited": "غير محدود",
+      "properties": "العقارات",
+      "users": "المستخدمين",
+      "storage": "التخزين",
+      "plans": {
+        "starter": "المبتدئ",
+        "professional": "الاحترافي",
+        "enterprise": "المؤسسي"
+      },
+      "features": {
+        "basic_analytics": "تحليلات أساسية",
+        "email_support": "دعم بالبريد",
+        "advanced_analytics": "تحليلات متقدمة",
+        "priority_support": "دعم ذو أولوية",
+        "api_access": "وصول API",
+        "custom_roles": "أدوار مخصصة",
+        "dedicated_support": "دعم مخصص",
+        "sla": "ضمان مستوى الخدمة",
+        "custom_integrations": "تكاملات مخصصة",
+        "white_label": "علامة بيضاء",
+        "unlimited": "كل شيء غير محدود",
+        "inventory_management": "إدارة المخزون",
+        "lead_management": "إدارة العملاء المحتملين",
+        "campaign_pricing": "تسعير الحملات",
+        "duplicate_detection": "كشف التكرارات",
+        "bulk_operations": "العمليات الجماعية",
+        "hijri_calendar": "التقويم الهجري",
+        "advanced_reporting": "التقارير المتقدمة",
+        "audit_log": "سجل التدقيق"
+      },
+      "units": "الوحدات",
+      "downgrade": "تخفيض",
+      "featureMatrix": "مقارنة المميزات",
+      "feature": "الميزة",
+      "billingHistory": "سجل الفواتير",
+      "billingDate": "التاريخ",
+      "billingAmount": "المبلغ",
+      "billingStatus": {
+        "paid": "مدفوع",
+        "pending": "قيد الانتظار",
+        "failed": "فشل"
+      },
+      "confirmUpgrade": "تأكيد الترقية",
+      "confirmDowngrade": "تأكيد التخفيض",
+      "upgradeDescription": "أنت على وشك ترقية خطة اشتراكك. سيتم تطبيق السعر الجديد من دورة الفوترة التالية.",
+      "downgradeDescription": "أنت على وشك تخفيض خطة اشتراكك. قد تصبح بعض الميزات غير متاحة.",
+      "from": "من",
+      "to": "إلى",
+      "newPrice": "السعر الجديد",
+      "upgradeSuccess": "تمت ترقية الخطة بنجاح",
+      "upgradeError": "فشل في ترقية الخطة",
+      "downgradeSuccess": "تم تخفيض الخطة بنجاح",
+      "downgradeError": "فشل في تخفيض الخطة"
+    },
+    "localization": {
+      "title": "التعريب",
+      "language": "اللغة الافتراضية",
+      "calendar": "التقويم الأساسي",
+      "hijri": "هجري (إسلامي)",
+      "gregorian": "ميلادي",
+      "dateFormat": "تنسيق التاريخ",
+      "hijriOnly": "هجري فقط",
+      "gregorianOnly": "ميلادي فقط",
+      "both": "كلاهما (هجري + ميلادي)",
+      "timeFormat": "تنسيق الوقت",
+      "currency": "العملة",
+      "sar": "ريال سعودي",
+      "aed": "درهم إماراتي",
+      "usd": "دولار أمريكي",
+      "timezone": "المنطقة الزمنية",
+      "firstDay": "أول يوم في الأسبوع",
+      "sunday": "الأحد",
+      "saturday": "السبت",
+      "monday": "الاثنين",
+      "numberFormat": "تنسيق الأرقام",
+      "saveSuccess": "تم حفظ إعدادات اللغة",
+      "saveError": "فشل في حفظ إعدادات اللغة"
+    },
+    "notifications": {
+      "title": "تفضيلات الإشعارات",
+      "category": "نوع الإشعار",
+      "inApp": "داخل التطبيق",
+      "email": "البريد",
+      "sms": "رسائل نصية"
+    },
+    "security": {
+      "changePassword": "تغيير كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "updatePassword": "تحديث كلمة المرور",
+      "twoFactor": "المصادقة الثنائية",
+      "twoFactorDescription": "أضف طبقة أمان إضافية لحسابك باستخدام المصادقة الثنائية.",
+      "activeSessions": "الجلسات النشطة",
+      "currentSession": "الجلسة الحالية",
+      "revoke": "إلغاء"
+    }
+  },
+  "bookings": {
+    "title": "الحجوزات",
+    "subtitle": "{count} حجز",
+    "newBooking": "حجز جديد",
+    "newBookingSubtitle": "إنشاء حجز جديد عبر معالج خطوة بخطوة",
+    "searchPlaceholder": "البحث بالوحدة أو العميل...",
+    "filterStatus": "تصفية حسب الحالة",
+    "createSuccess": "تم إنشاء الحجز بنجاح",
+    "createError": "فشل في إنشاء الحجز",
+    "status": {
+      "pending": "قيد الانتظار",
+      "confirmed": "مؤكد",
+      "cancelled": "ملغي",
+      "expired": "منتهي الصلاحية",
+      "completed": "مكتمل"
+    },
+    "table": {
+      "unit": "الوحدة",
+      "client": "العميل",
+      "totalPrice": "السعر الإجمالي",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "empty": {
+      "title": "لا توجد حجوزات",
+      "description": "أنشئ أول حجز لبدء إدارة المبيعات."
+    },
+    "detail": {
+      "title": "الحجز {id}",
+      "timeline": "الجدول الزمني",
+      "unitInfo": "معلومات الوحدة",
+      "unit": "الوحدة",
+      "clientInfo": "معلومات العميل",
+      "paymentPlan": "خطة الدفع",
+      "dueDate": "تاريخ الاستحقاق",
+      "cancelReason": "سبب الإلغاء"
+    },
+    "timeline": {
+      "created": "تم الإنشاء",
+      "confirmed": "تم التأكيد",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "installmentStatus": {
+      "paid": "مدفوع",
+      "pending": "قيد الانتظار",
+      "overdue": "متأخر"
+    },
+    "actions": {
+      "confirm": "تأكيد",
+      "cancel": "إلغاء",
+      "complete": "إكمال"
+    },
+    "cancel": {
+      "title": "إلغاء الحجز",
+      "description": "هل أنت متأكد من إلغاء هذا الحجز؟ لا يمكن التراجع عن هذا الإجراء.",
+      "reason": "سبب الإلغاء",
+      "reasonPlaceholder": "أدخل سبب الإلغاء..."
+    },
+    "wizard": {
+      "step1": "اختيار الوحدة",
+      "step2": "معلومات العميل",
+      "step3": "خطة الدفع",
+      "step4": "المراجعة",
+      "searchUnits": "البحث في الوحدات...",
+      "noUnitsFound": "لم يتم العثور على وحدات",
+      "unitLabel": "الوحدة {number}",
+      "existingLead": "عميل حالي",
+      "newClient": "عميل جديد",
+      "searchLeads": "البحث بالاسم أو الهاتف...",
+      "clientName": "الاسم الكامل",
+      "clientNamePlaceholder": "مثال: أحمد القحطاني",
+      "clientNameAr": "الاسم الكامل (عربي)",
+      "clientNameArPlaceholder": "مثال: أحمد القحطاني",
+      "clientPhone": "رقم الهاتف",
+      "clientEmail": "البريد الإلكتروني",
+      "nationalId": "رقم الهوية",
+      "nationalIdPlaceholder": "مثال: 1099887766",
+      "totalPrice": "السعر الإجمالي (ر.س)",
+      "downPayment": "الدفعة المقدمة (ر.س)",
+      "installments": "الأقساط",
+      "installmentAmount": "قيمة القسط",
+      "months": "شهر",
+      "remaining": "المبلغ المتبقي",
+      "monthlyPayment": "القسط الشهري",
+      "schedulePreview": "معاينة جدول الدفع",
+      "moreInstallments": "أقساط إضافية",
+      "confirmBooking": "تأكيد الحجز"
+    }
+  },
+  "campaigns": {
+    "title": "الحملات",
+    "subtitle": "{count} حملة",
+    "createCampaign": "إنشاء حملة",
+    "createDescription": "إنشاء حملة تسعير جديدة لعقاراتك.",
+    "searchPlaceholder": "البحث في الحملات...",
+    "filterStatus": "تصفية حسب الحالة",
+    "createSuccess": "تم إنشاء الحملة بنجاح",
+    "createError": "فشل في إنشاء الحملة",
+    "units": "وحدات",
+    "status": {
+      "draft": "مسودة",
+      "active": "نشطة",
+      "ended": "منتهية",
+      "paused": "متوقفة"
+    },
+    "empty": {
+      "title": "لا توجد حملات",
+      "description": "أنشئ أول حملة لتقديم خصومات على العقارات."
+    },
+    "form": {
+      "name": "اسم الحملة",
+      "nameAr": "اسم الحملة (عربي)",
+      "namePlaceholder": "مثال: عرض رمضان",
+      "nameArPlaceholder": "مثال: عرض رمضان",
+      "descriptionPlaceholder": "وصف مختصر للحملة...",
+      "discount": "إعدادات الخصم",
+      "discountType": "نوع الخصم",
+      "percentage": "نسبة مئوية",
+      "fixedAmount": "مبلغ ثابت",
+      "discountValue": "القيمة",
+      "dates": "فترة الحملة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء"
+    },
+    "stats": {
+      "unitsAffected": "الوحدات المتأثرة",
+      "unitsSold": "الوحدات المباعة",
+      "revenueImpact": "تأثير الإيرادات"
+    },
+    "detail": {
+      "period": "فترة الحملة",
+      "discount": "الخصم",
+      "affectedUnits": "الوحدات المتأثرة"
+    }
+  }
+}
