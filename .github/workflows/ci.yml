@@ -1,0 +1,128 @@
+# ============================================================
+# CI Pipeline — Runs on every Pull Request
+# Lint → Type Check → Test → Build
+# ============================================================
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "20"
+  DATABASE_URL: "postgresql://test:test@localhost:5432/proptech_test?schema=public"
+
+jobs:
+  # ---- Lint & Type Check ----
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: cd packages/db && npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+  # ---- Unit Tests ----
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: proptech_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test -d proptech_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: cd packages/db && npx prisma generate
+
+      - name: Push schema to test DB
+        run: cd packages/db && npx prisma db push --skip-generate
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+
+      - name: Run tests with coverage
+        run: npm run test -- --coverage
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+          JWT_ACCESS_SECRET: test-secret
+          JWT_REFRESH_SECRET: test-refresh-secret
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: apps/api/coverage/
+          retention-days: 7
+
+  # ---- Build Check ----
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: cd packages/db && npx prisma generate
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Verify API build output
+        run: test -f apps/api/dist/main.js
+
+      - name: Verify Web build output
+        run: test -d apps/web/.next

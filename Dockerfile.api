@@ -1,0 +1,88 @@
+# ============================================================
+# Proptech API — Production Dockerfile
+# Multi-stage build for NestJS backend
+# ============================================================
+
+# ---- Stage 1: Builder ----
+FROM node:20-alpine AS builder
+
+RUN apk add --no-cache libc6-compat openssl
+
+WORKDIR /app
+
+# Copy root workspace files
+COPY package.json package-lock.json turbo.json tsconfig.base.json ./
+
+# Copy package.json files for workspace resolution
+COPY apps/api/package.json apps/api/
+COPY packages/db/package.json packages/db/
+COPY packages/config/package.json packages/config/
+COPY packages/types/package.json packages/types/
+COPY packages/ui/package.json packages/ui/
+
+# Install all dependencies (including dev for build)
+RUN npm ci
+
+# Copy source code
+COPY packages/db/ packages/db/
+COPY packages/config/ packages/config/
+COPY packages/types/ packages/types/
+COPY packages/ui/ packages/ui/
+COPY apps/api/ apps/api/
+
+# Generate Prisma client
+RUN cd packages/db && npx prisma generate
+
+# Build shared packages first, then API
+RUN npx turbo build --filter=@proptech/api
+
+# ---- Stage 2: Production Runner ----
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache libc6-compat openssl curl
+
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nestjs
+
+# Copy package files for production install
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/
+COPY packages/db/package.json packages/db/
+COPY packages/config/package.json packages/config/
+COPY packages/types/package.json packages/types/
+COPY packages/ui/package.json packages/ui/
+
+# Install production dependencies only
+RUN npm ci --omit=dev
+
+# Copy Prisma schema and generate client for production
+COPY packages/db/prisma/ packages/db/prisma/
+RUN cd packages/db && npx prisma generate
+
+# Copy built output from builder
+COPY --from=builder /app/apps/api/dist/ apps/api/dist/
+COPY --from=builder /app/packages/db/dist/ packages/db/dist/
+COPY --from=builder /app/packages/config/dist/ packages/config/dist/
+COPY --from=builder /app/packages/types/dist/ packages/types/dist/
+
+# Copy seed file for migrations
+COPY --from=builder /app/packages/db/prisma/seed.ts packages/db/prisma/seed.ts
+
+# Set ownership
+RUN chown -R nestjs:nodejs /app
+
+USER nestjs
+
+EXPOSE 3001
+
+ENV NODE_ENV=production
+ENV PORT=3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD curl -f http://localhost:3001/api/health || exit 1
+
+CMD ["node", "apps/api/dist/main.js"]

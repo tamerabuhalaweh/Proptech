@@ -1,0 +1,67 @@
+# ============================================================
+# Docker ignore — shared for monorepo
+# ============================================================
+
+# Git
+.git
+.gitignore
+
+# Node modules (installed fresh in Docker)
+node_modules
+**/node_modules
+
+# Build output (rebuilt in Docker)
+dist
+**/dist
+.next
+**/.next
+out
+**/out
+build
+
+# Turbo cache
+.turbo
+**/.turbo
+
+# Environment files (passed via docker-compose)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage
+coverage
+**/coverage
+*.test.ts
+*.spec.ts
+**/__tests__
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Docker files (don't copy into context recursively)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Infrastructure
+infra/
+
+# Misc
+*.log
+npm-debug.log*
+.prettierrc
+.eslintrc*
+tsconfig.tsbuildinfo
+**/tsconfig.tsbuildinfo

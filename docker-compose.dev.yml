@@ -1,0 +1,83 @@
+# ============================================================
+# Proptech Platform — Docker Compose Dev Override
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+# ============================================================
+
+services:
+  # ---- PostgreSQL — expose for local tools ----
+  postgres:
+    ports:
+      - "5432:5432"
+
+  # ---- Redis — expose for local tools ----
+  redis:
+    ports:
+      - "6379:6379"
+
+  # ---- API — Dev mode with hot reload ----
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      target: builder
+    command: npx turbo dev --filter=@proptech/api
+    environment:
+      NODE_ENV: development
+      SWAGGER_ENABLED: "true"
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+      - ./packages/db/src:/app/packages/db/src
+      - ./packages/db/prisma:/app/packages/db/prisma
+      - ./packages/config/src:/app/packages/config/src
+      - ./packages/types/src:/app/packages/types/src
+    ports:
+      - "3001:3001"
+      - "9229:9229"  # Node.js debugger
+
+  # ---- Web — Dev mode with hot reload ----
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      target: builder
+    command: npx turbo dev --filter=@proptech/web
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./apps/web/app:/app/apps/web/app
+      - ./apps/web/components:/app/apps/web/components
+      - ./apps/web/hooks:/app/apps/web/hooks
+      - ./apps/web/lib:/app/apps/web/lib
+      - ./apps/web/providers:/app/apps/web/providers
+      - ./apps/web/i18n:/app/apps/web/i18n
+      - ./apps/web/messages:/app/apps/web/messages
+    ports:
+      - "3000:3000"
+
+  # ---- Nginx — not needed in dev ----
+  nginx:
+    profiles:
+      - disabled
+
+  # ---- pgAdmin — Database management UI ----
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: proptech-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@proptech.sa}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - proptech-network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  pgadmin_data:
+    driver: local

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "@/i18n/navigation";
 import { NotificationItem } from "./notification-item";
-import { mockAppNotifications } from "@/lib/mock-notifications";
+import { useNotifications, useUnreadNotificationCount, useMarkAllNotificationsAsRead } from "@/hooks/api/use-notifications";
 import type { AppNotification } from "@/lib/types";
 
 interface NotificationBellProps {
@@ -27,8 +27,12 @@ export function NotificationBell({ onNotificationClick }: NotificationBellProps)
   const locale = useLocale();
   const isAr = locale === "ar";
 
-  const notifications = mockAppNotifications;
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const { data: notificationsData } = useNotifications({ page: 1, perPage: 5 });
+  const { data: unreadData } = useUnreadNotificationCount();
+  const markAllRead = useMarkAllNotificationsAsRead();
+
+  const notifications = notificationsData?.data || [];
+  const unreadCount = unreadData?.count ?? 0;
   const recentNotifications = notifications.slice(0, 5);
 
   return (
@@ -58,7 +62,13 @@ export function NotificationBell({ onNotificationClick }: NotificationBellProps)
           <h3 className="text-sm font-semibold">
             {isAr ? "الإشعارات" : "Notifications"}
           </h3>
-          <Button variant="ghost" size="sm" className="text-xs h-7">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-xs h-7"
+            onClick={() => markAllRead.mutate()}
+            disabled={unreadCount === 0}
+          >
             <Check className="h-3 w-3 me-1" />
             {isAr ? "تحديد الكل كمقروء" : "Mark all read"}
           </Button>

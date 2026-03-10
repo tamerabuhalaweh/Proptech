@@ -4,7 +4,7 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { TenantsModule } from './tenants/tenants.module';
@@ -26,6 +26,8 @@ import { DocumentsModule } from './documents/documents.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MilestonesModule } from './milestones/milestones.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 @Module({
   imports: [
@@ -70,6 +72,16 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     MilestonesModule,
   ],
   providers: [
+    // Global exception filter — structured error responses
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+    // Global logging interceptor — logs all requests
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
     // Global JWT guard — all routes require auth by default
     // Use @Public() decorator to skip
     {

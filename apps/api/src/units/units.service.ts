@@ -284,12 +284,13 @@ export class UnitsService {
           },
         });
         results.created++;
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const prismaError = error as { code?: string; message?: string };
         results.errors.push({
           unitNumber: unitDto.unitNumber,
-          error: error.code === 'P2002'
+          error: prismaError.code === 'P2002'
             ? `Duplicate unit number "${unitDto.unitNumber}" in this building`
-            : error.message,
+            : prismaError.message || 'Unknown error',
         });
       }
     }

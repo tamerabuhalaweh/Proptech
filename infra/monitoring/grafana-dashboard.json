@@ -1,0 +1,50 @@
+{
+  "__comment": "Placeholder Grafana dashboard for Proptech Platform",
+  "dashboard": {
+    "id": null,
+    "uid": "proptech-overview",
+    "title": "Proptech Platform Overview",
+    "tags": ["proptech", "overview"],
+    "timezone": "Asia/Riyadh",
+    "panels": [
+      {
+        "title": "API Health Status",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+        "description": "Current health status of the API service"
+      },
+      {
+        "title": "Web Health Status",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+        "description": "Current health status of the Web service"
+      },
+      {
+        "title": "Request Rate",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+        "description": "HTTP requests per second"
+      },
+      {
+        "title": "Response Time (p95)",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+        "description": "95th percentile response time"
+      },
+      {
+        "title": "Error Rate",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+        "description": "HTTP 4xx and 5xx error rates"
+      },
+      {
+        "title": "Database Connections",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+        "description": "Active PostgreSQL connections"
+      }
+    ],
+    "time": { "from": "now-6h", "to": "now" },
+    "refresh": "30s"
+  }
+}

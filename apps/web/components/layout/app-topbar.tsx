@@ -32,6 +32,11 @@ import {
 } from "@/components/ui/tooltip";
 import { CommandSearch } from "@/components/layout/command-search";
 import { mockUser, mockNotifications } from "@/lib/mock-data";
+import {
+  useNotifications,
+  useUnreadNotificationCount,
+  useMarkAllNotificationsAsRead,
+} from "@/hooks/api/use-notifications";
 
 interface AppTopbarProps {
   onMenuToggle: () => void;
@@ -103,7 +108,13 @@ export function AppTopbar({ onMenuToggle, showMenuButton }: AppTopbarProps) {
 
   React.useEffect(() => setMounted(true), []);
 
-  const unreadCount = mockNotifications.filter((n) => !n.read).length;
+  // Use notification hooks with mock data fallback
+  const { data: notificationsData } = useNotifications({ page: 1, perPage: 5 });
+  const { data: unreadData } = useUnreadNotificationCount();
+  const markAllRead = useMarkAllNotificationsAsRead();
+
+  const topbarNotifications = notificationsData?.data || mockNotifications;
+  const unreadCount = unreadData?.count ?? mockNotifications.filter((n: { read: boolean }) => !n.read).length;
 
   const handleLanguageSwitch = () => {
     const newLocale = locale === "en" ? "ar" : "en";
@@ -224,14 +235,20 @@ export function AppTopbar({ onMenuToggle, showMenuButton }: AppTopbarProps) {
             <DropdownMenuContent align="end" className="w-80 p-0">
               <div className="flex items-center justify-between border-b p-3">
                 <h3 className="text-sm font-semibold">{t("notifications")}</h3>
-                <Button variant="ghost" size="sm" className="text-xs h-7">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={() => markAllRead.mutate()}
+                  disabled={unreadCount === 0}
+                >
                   <Check className="h-3 w-3" />
                   {locale === "ar" ? "تحديد الكل كمقروء" : "Mark all read"}
                 </Button>
               </div>
               <div className="max-h-80 overflow-y-auto">
-                {mockNotifications.length > 0 ? (
-                  mockNotifications.map((n) => (
+                {topbarNotifications.length > 0 ? (
+                  topbarNotifications.map((n: typeof mockNotifications[0]) => (
                     <NotificationItem
                       key={n.id}
                       notification={n}

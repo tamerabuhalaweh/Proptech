@@ -1,0 +1,50 @@
+# ============================================================
+# Prometheus Configuration — Basic scraping setup
+# ============================================================
+
+global:
+  scrape_interval: 15s      # How often to scrape targets
+  evaluation_interval: 15s  # How often to evaluate rules
+  scrape_timeout: 10s
+
+# ---- Scrape Configs ----
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Proptech API health endpoint
+  - job_name: "proptech-api"
+    metrics_path: /api/health
+    scrape_interval: 30s
+    static_configs:
+      - targets: ["api:3001"]
+        labels:
+          service: "api"
+          environment: "production"
+
+  # Proptech Web health
+  - job_name: "proptech-web"
+    metrics_path: /
+    scrape_interval: 30s
+    static_configs:
+      - targets: ["web:3000"]
+        labels:
+          service: "web"
+          environment: "production"
+
+  # Nginx (requires nginx-prometheus-exporter — future)
+  # - job_name: "nginx"
+  #   static_configs:
+  #     - targets: ["nginx-exporter:9113"]
+
+  # PostgreSQL (requires postgres_exporter — future)
+  # - job_name: "postgresql"
+  #   static_configs:
+  #     - targets: ["postgres-exporter:9187"]
+
+  # Redis (requires redis_exporter — future)
+  # - job_name: "redis"
+  #   static_configs:
+  #     - targets: ["redis-exporter:9121"]
