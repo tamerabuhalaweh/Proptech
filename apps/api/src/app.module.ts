@@ -5,6 +5,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { TenantsModule } from './tenants/tenants.module';
@@ -26,6 +27,7 @@ import { DocumentsModule } from './documents/documents.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MilestonesModule } from './milestones/milestones.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
@@ -36,6 +38,12 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
       isGlobal: true,
       envFilePath: ['.env', '.env.local'],
     }),
+
+    // Rate limiting — 100 requests per 60 seconds per IP
+    ThrottlerModule.forRoot([{
+      ttl: 60000,
+      limit: 100,
+    }]),
 
     // Database
     PrismaModule,
@@ -82,11 +90,21 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     },
+    // Global rate limiting guard — brute-force protection
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
     // Global JWT guard — all routes require auth by default
     // Use @Public() decorator to skip
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    // Global Roles guard — RBAC enforcement on all routes
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

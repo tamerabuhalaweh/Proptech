@@ -57,23 +57,47 @@ describe('TenantsController', () => {
   });
 
   describe('findOne', () => {
-    it('should call tenantsService.findOne', async () => {
+    it('should call tenantsService.findOne for SUPER_ADMIN', async () => {
       const expected = { id: '1', name: 'Test' };
       mockTenantsService.findOne.mockResolvedValue(expected);
+      const user = { sub: 'u1', email: 'a@a.com', role: 'SUPER_ADMIN', tenantId: 'other' };
 
-      const result = await controller.findOne('1');
+      const result = await controller.findOne(user as any, '1');
       expect(result.id).toBe('1');
+    });
+
+    it('should allow TENANT_ADMIN to access their own tenant', async () => {
+      const expected = { id: 't1', name: 'Test' };
+      mockTenantsService.findOne.mockResolvedValue(expected);
+      const user = { sub: 'u1', email: 'a@a.com', role: 'TENANT_ADMIN', tenantId: 't1' };
+
+      const result = await controller.findOne(user as any, 't1');
+      expect(result.id).toBe('t1');
+    });
+
+    it('should deny TENANT_ADMIN from accessing other tenants', async () => {
+      const user = { sub: 'u1', email: 'a@a.com', role: 'TENANT_ADMIN', tenantId: 't1' };
+
+      await expect(controller.findOne(user as any, 't2')).rejects.toThrow('You can only access your own tenant');
     });
   });
 
   describe('update', () => {
-    it('should call tenantsService.update', async () => {
+    it('should call tenantsService.update for SUPER_ADMIN', async () => {
       const dto = { name: 'Updated' };
       const expected = { id: '1', name: 'Updated' };
       mockTenantsService.update.mockResolvedValue(expected);
+      const user = { sub: 'u1', email: 'a@a.com', role: 'SUPER_ADMIN', tenantId: 'other' };
 
-      const result = await controller.update('1', dto);
+      const result = await controller.update(user as any, '1', dto);
       expect(result.name).toBe('Updated');
+    });
+
+    it('should deny TENANT_ADMIN from updating other tenants', async () => {
+      const dto = { name: 'Updated' };
+      const user = { sub: 'u1', email: 'a@a.com', role: 'TENANT_ADMIN', tenantId: 't1' };
+
+      await expect(controller.update(user as any, 't2', dto)).rejects.toThrow('You can only access your own tenant');
     });
   });
 

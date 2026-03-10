@@ -14,6 +14,7 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  ForbiddenException,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -29,6 +30,7 @@ import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { ChangeTenantStatusDto } from './dto/change-tenant-status.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { Roles } from '../common/decorators/roles.decorator';
+import { CurrentUser, JwtUser } from '../common/decorators/current-user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 
 @ApiTags('Tenants')
@@ -37,6 +39,16 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 @UseGuards(RolesGuard)
 export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}
+
+  /**
+   * SECURITY: Ensure TENANT_ADMIN can only access their own tenant.
+   * SUPER_ADMIN can access any tenant.
+   */
+  private assertTenantAccess(user: JwtUser, targetTenantId: string): void {
+    if (user.role !== UserRole.SUPER_ADMIN && user.tenantId !== targetTenantId) {
+      throw new ForbiddenException('You can only access your own tenant');
+    }
+  }
 
   @Post()
   @Roles(UserRole.SUPER_ADMIN)
@@ -63,7 +75,8 @@ export class TenantsController {
   @ApiParam({ name: 'id', description: 'Tenant ID' })
   @ApiResponse({ status: 200, description: 'Tenant details' })
   @ApiResponse({ status: 404, description: 'Tenant not found' })
-  async findOne(@Param('id') id: string) {
+  async findOne(@CurrentUser() user: JwtUser, @Param('id') id: string) {
+    this.assertTenantAccess(user, id);
     return this.tenantsService.findOne(id);
   }
 
@@ -73,7 +86,8 @@ export class TenantsController {
   @ApiParam({ name: 'id', description: 'Tenant ID' })
   @ApiResponse({ status: 200, description: 'Tenant updated' })
   @ApiResponse({ status: 404, description: 'Tenant not found' })
-  async update(@Param('id') id: string, @Body() dto: UpdateTenantDto) {
+  async update(@CurrentUser() user: JwtUser, @Param('id') id: string, @Body() dto: UpdateTenantDto) {
+    this.assertTenantAccess(user, id);
     return this.tenantsService.update(id, dto);
   }
 

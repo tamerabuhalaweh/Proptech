@@ -145,14 +145,14 @@ export class AuthService {
     // Hash password
     const passwordHash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
 
-    // Create user
+    // Create user — always VIEWER role on self-registration (security hardening)
     const user = await this.prisma.user.create({
       data: {
         tenantId: dto.tenantId,
         email: dto.email,
         passwordHash,
         displayName: dto.displayName,
-        role: dto.role || UserRole.VIEWER,
+        role: UserRole.VIEWER,
       },
     });
 

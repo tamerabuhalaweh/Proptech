@@ -9,6 +9,9 @@ import {
   IsNumber,
   IsArray,
   Min,
+  IsUrl,
+  MaxLength,
+  Matches,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { DocumentCategory, DocumentEntityType } from '@prisma/client';
@@ -20,6 +23,8 @@ export class CreateDocumentDto {
 
   @ApiProperty({ example: 'sales-contract-v2.pdf' })
   @IsString()
+  @MaxLength(255, { message: 'File name must not exceed 255 characters' })
+  @Matches(/^[^/\\:*?"<>|]+$/, { message: 'File name contains invalid characters' })
   fileName!: string;
 
   @ApiProperty({ example: 'application/pdf' })
@@ -57,6 +62,7 @@ export class CreateDocumentDto {
   tags?: string[];
 
   @ApiProperty({ example: 'https://storage.example.com/docs/contract.pdf' })
-  @IsString()
+  @IsUrl({ protocols: ['https'], require_protocol: true }, { message: 'URL must be a valid HTTPS URL' })
+  @MaxLength(2048, { message: 'URL must not exceed 2048 characters' })
   url!: string;
 }

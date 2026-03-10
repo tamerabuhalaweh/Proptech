@@ -9,6 +9,7 @@ import {
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -23,16 +24,19 @@ export class AuthController {
 
   @Post('login')
   @Public()
+  @Throttle({ default: { ttl: 60000, limit: 5 } }) // 5 login attempts per minute per IP — brute-force protection
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login with email and password' })
   @ApiResponse({ status: 200, description: 'Login successful' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
+  @ApiResponse({ status: 429, description: 'Too many login attempts' })
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
 
   @Post('register')
   @Public()
+  @Throttle({ default: { ttl: 60000, limit: 3 } }) // 3 registrations per minute per IP
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'Registration successful' })
@@ -43,6 +47,7 @@ export class AuthController {
 
   @Post('refresh')
   @Public()
+  @Throttle({ default: { ttl: 60000, limit: 10 } }) // 10 refresh attempts per minute per IP
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Refresh access token' })
   @ApiResponse({ status: 200, description: 'Token refreshed' })

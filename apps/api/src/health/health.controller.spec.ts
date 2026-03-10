@@ -50,7 +50,8 @@ describe('HealthController', () => {
 
       expect(result.status).toBe('degraded');
       expect(result.checks.database.status).toBe('error');
-      expect(result.checks.database.error).toBe('Connection refused');
+      // SECURITY: error details are no longer exposed in response
+      expect(result.checks.database).not.toHaveProperty('error');
     });
   });
 });

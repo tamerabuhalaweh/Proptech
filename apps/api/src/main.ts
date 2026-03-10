@@ -6,6 +6,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
@@ -17,15 +18,24 @@ async function bootstrap(): Promise<void> {
   const apiPrefix = configService.get<string>('API_PREFIX', 'api');
   const corsOrigins = configService.get<string>('CORS_ORIGINS', 'http://localhost:3000');
   const swaggerEnabled = configService.get<string>('SWAGGER_ENABLED', 'true') === 'true';
+  const isProduction = configService.get<string>('NODE_ENV') === 'production';
 
   // Global prefix
   app.setGlobalPrefix(apiPrefix);
 
-  // CORS
+  // Security headers via Helmet
+  app.use(helmet({
+    contentSecurityPolicy: isProduction ? undefined : false, // Disable CSP in dev for Swagger
+    crossOriginEmbedderPolicy: false, // Allow embedding for Swagger UI
+  }));
+
+  // CORS — strict origin validation
   app.enableCors({
     origin: corsOrigins.split(',').map((o) => o.trim()),
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+    maxAge: 3600, // Cache preflight for 1 hour
   });
 
   // Global validation pipe
@@ -40,7 +50,12 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
-  // Swagger
+  // Request body size limit (10MB)
+  app.use(
+    (await import('express')).json({ limit: '10mb' }),
+  );
+
+  // Swagger — disabled in production by default
   if (swaggerEnabled) {
     const swaggerConfig = new DocumentBuilder()
       .setTitle('Proptech API')
@@ -72,7 +87,9 @@ async function bootstrap(): Promise<void> {
 
   await app.listen(port);
   logger.log(`🚀 API running on http://localhost:${port}/${apiPrefix}`);
-  logger.log(`📚 Swagger UI: http://localhost:${port}/docs`);
+  if (swaggerEnabled) {
+    logger.log(`📚 Swagger UI: http://localhost:${port}/docs`);
+  }
 }
 
 bootstrap();

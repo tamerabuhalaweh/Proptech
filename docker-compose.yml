@@ -12,9 +12,10 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-proptech}
       POSTGRES_USER: ${POSTGRES_USER:-proptech}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}}
-    ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required — do not use defaults in production}
+    # SECURITY: Postgres port not exposed to host in production — only accessible via internal network
+    # ports:
+    #   - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -31,15 +32,16 @@ services:
     image: redis:7-alpine
     container_name: proptech-redis
     restart: unless-stopped
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-${REDIS_PASSWORD:?Set REDIS_PASSWORD}}
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+    # SECURITY: Redis port not exposed to host in production — only accessible via internal network
+    # ports:
+    #   - "${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
     networks:
       - proptech-network
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-${REDIS_PASSWORD:?Set REDIS_PASSWORD}}", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -54,14 +56,14 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-      DATABASE_URL: postgresql://${POSTGRES_USER:-proptech}:${POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}}@postgres:5432/${POSTGRES_DB:-proptech}?schema=public
-      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-${JWT_ACCESS_SECRET:?Set JWT_ACCESS_SECRET}}
-      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-${JWT_REFRESH_SECRET:?Set JWT_REFRESH_SECRET}}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-proptech}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-proptech}?schema=public
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?JWT_ACCESS_SECRET is required — generate with: openssl rand -base64 64}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?JWT_REFRESH_SECRET is required — generate with: openssl rand -base64 64}
       JWT_ACCESS_EXPIRY: ${JWT_ACCESS_EXPIRY:-15m}
       JWT_REFRESH_EXPIRY: ${JWT_REFRESH_EXPIRY:-7d}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost}
       SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
-      REDIS_URL: redis://:${REDIS_PASSWORD:-${REDIS_PASSWORD:?Set REDIS_PASSWORD}}@redis:6379
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
     ports:
       - "${API_PORT:-3001}:3001"
     depends_on:

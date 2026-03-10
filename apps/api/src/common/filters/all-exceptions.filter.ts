@@ -76,7 +76,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     }
     // ---- Generic Errors ----
     else if (exception instanceof Error) {
-      message = exception.message;
+      // SECURITY: Don't expose raw error messages to clients in production
+      // They may contain internal paths, SQL, or stack info
+      message = process.env.NODE_ENV === 'production'
+        ? 'Internal server error'
+        : exception.message;
     }
 
     // Log server errors

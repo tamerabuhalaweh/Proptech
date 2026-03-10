@@ -31,11 +31,24 @@ export class EmailTemplatesService {
   ) {}
 
   /**
+   * Escape HTML special characters to prevent XSS injection
+   */
+  private escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  /**
    * Interpolate {{variable}} placeholders in a string
+   * SECURITY: All variable values are HTML-escaped to prevent XSS
    */
   private interpolate(template: string, variables: Record<string, string>): string {
     return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-      return variables[key] !== undefined ? variables[key] : match;
+      return variables[key] !== undefined ? this.escapeHtml(variables[key]) : match;
     });
   }
 

@@ -5,7 +5,7 @@
 // ============================================================
 
 import { Controller, Get } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Public } from '../common/decorators/public.decorator';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -29,9 +29,11 @@ export class HealthController {
   }
 
   @Get('deep')
-  @Public()
-  @ApiOperation({ summary: 'Deep health check — includes database connectivity' })
+  // SECURITY: Deep health check requires authentication — exposes internal system metrics
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Deep health check — includes database connectivity (authenticated)' })
   @ApiResponse({ status: 200, description: 'All systems operational' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 503, description: 'One or more systems are down' })
   async deepCheck() {
     const checks: Record<string, { status: string; latency?: number; error?: string }> = {};
@@ -44,11 +46,11 @@ export class HealthController {
         status: 'ok',
         latency: Date.now() - dbStart,
       };
-    } catch (error) {
+    } catch {
       checks.database = {
         status: 'error',
         latency: Date.now() - dbStart,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        // SECURITY: Do not expose database error details
       };
     }
 

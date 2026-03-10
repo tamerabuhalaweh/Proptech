@@ -25,17 +25,19 @@ export class BookingsService {
 
   /**
    * Check if unit already has an active booking (PENDING or CONFIRMED)
+   * SECURITY: Scoped to tenant to prevent cross-tenant information leakage
    */
-  private async assertNoActiveBooking(unitId: string): Promise<void> {
+  private async assertNoActiveBooking(tenantId: string, unitId: string): Promise<void> {
     const existing = await this.prisma.booking.findFirst({
       where: {
+        tenantId,
         unitId,
         status: { in: [BookingStatus.PENDING, BookingStatus.CONFIRMED] },
       },
     });
     if (existing) {
       throw new ConflictException(
-        `Unit already has an active booking (${existing.id}) with status ${existing.status}`,
+        `Unit already has an active booking with status ${existing.status}`,
       );
     }
   }
@@ -58,7 +60,7 @@ export class BookingsService {
     }
 
     // Verify no active booking on this unit
-    await this.assertNoActiveBooking(dto.unitId);
+    await this.assertNoActiveBooking(tenantId, dto.unitId);
 
     // Verify lead if provided
     if (dto.leadId) {
